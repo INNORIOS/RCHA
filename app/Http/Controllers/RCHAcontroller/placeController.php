@@ -19,12 +19,6 @@ class placeController extends Controller
             'category_id'=> 'required',
             'place_preview_viedo' => 'required',
             'place_link' => 'required',
-            'place_image1' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'place_image2' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'place_image3' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'place_image4' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            'place_image5' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            'place_image6' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
             
         ]);
         if ($validator->fails()) {
