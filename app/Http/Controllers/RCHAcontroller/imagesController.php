@@ -37,7 +37,16 @@ class imagesController extends Controller
             'image' => $image
         ], 200);
     }
+    public function deleteImage($id)
+    {
+        $image = Image::findOrFail($id);
+        $image->delete();
 
+        return response()->json([
+            'message' => 'Image deleted successfully',
+        ], 200);
+    }
+   
    
     
 }
