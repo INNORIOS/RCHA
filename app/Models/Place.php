@@ -16,13 +16,14 @@ class Place extends Model
         'place_details',
         'category_id',
         'place_preview_viedo',
-        'place_image1',
-        'place_image2',
-        'place_image3',
-        'place_image4',
-        'place_image5',
-        'place_image6',
-        'place_link',
+        'place_link'
+        // 'place_image1',
+        // 'place_image2',
+        // 'place_image3',
+        // 'place_image4',
+        // 'place_image5',
+        // 'place_image6',
+        
     ];
     protected $guarded = [];
 
@@ -30,4 +31,8 @@ class Place extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    public function images()
+{
+    return $this->hasMany(Image::class);
+}
 }
