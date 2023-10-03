@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Place;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Image extends Model
 {
@@ -15,5 +16,11 @@ class Image extends Model
     // 'place_image4',
     // 'place_image5',
     // 'place_image6'
+    protected $guarded = [];
+    public function place()
+{
+    return $this->belongsTo(Place::class);
+}
+
     
 }
