@@ -22,6 +22,21 @@ class imagesController extends Controller
             'image' => $image
         ], 201);
     }
+    public function updateImage(Request $request, $id)
+    {
+        $request->validate([
+            'place_id' => 'required|exists:places,id',
+            'image_path' => 'required|string',
+        ]);
+
+        $image = Image::findOrFail($id);
+        $image->update($request->all());
+
+        return response()->json([
+            'message' => 'Image updated successfully',
+            'image' => $image
+        ], 200);
+    }
 
    
     
