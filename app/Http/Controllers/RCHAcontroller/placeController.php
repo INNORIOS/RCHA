@@ -37,8 +37,9 @@ class placeController extends Controller
     public function getPlaces()
 {
     $places = Place::all();
-
+    if($places)
     return response()->json($places, 200);
+    return response()->json(['message' => 'Places are not found!'], 400);
 }
 public function getPlaceById($place_id)
 {
@@ -54,7 +55,7 @@ public function updatePlace(Request $request, $place_id)
         'place_status' => 'required',
         'place_details' => 'required',
         'category_id'=> 'required',
-        'place_preview_viedo' => 'required', // Corrected field name
+        'place_preview_viedo' => 'required', 
         'place_link' => 'required',
     ]);
 
@@ -79,7 +80,5 @@ public function deletePlace($place_id)
     $place->delete();
     return response()->json(['message' => 'Place deleted successfully!'], 200);
 }
-
-
 
 }

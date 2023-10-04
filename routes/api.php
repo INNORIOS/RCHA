@@ -9,9 +9,10 @@ use App\Http\Controllers\MailController;
 use App\Http\Controllers\userAuthController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\RCHAcontroller\placeController;
+use App\Http\Controllers\RCHAcontroller\imagesController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
-use App\Http\Controllers\RCHAcontroller\placeController;
 
 Auth::routes([
     'verify'=>true
@@ -40,6 +41,14 @@ Route::group(['middleware'=>'api','prefix'=>'auth'],function($router){
                 ->name('verification.send');
                 
                 Route::get('/send-email', [MailController::class,'sendEmail']);
-Route::post('/storeNewPlace',[placeController::class,'storePlace'])->name('storeNewPlace');
+
+/*  ROUTE FOR IMAGE CONTROLLER API*/
 Route::post('/upload-image',[imagesController::class,'createImage'])->name('upload-image');
+
+/*  ROUTE FOR PLACE CONTROLLER API*/
+Route::post('/storeNewPlace',[placeController::class,'storePlace'])->name('storeNewPlace');
+Route::get('/places', [placeController::class, 'getPlaces'])->name('getAllPlaces');
+Route::get('/places/{place_id}', [placeController::class, 'getPlaceById'])->name('getPlaceById');
+Route::put('/places/{iplace_idd}', [placeController::class, 'updatePlace'])->name('updatePlace');
+Route::delete('/places/{place_id}', [placeController::class, 'deletePlace'])->name('deletePlace');
 });
