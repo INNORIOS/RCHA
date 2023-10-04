@@ -42,7 +42,7 @@ class placeController extends Controller
 }
 public function getPlaceById($place_id)
 {
-    $place = Place::findOrFail($place_id);
+    $place = Place::find($place_id);
 
     return response()->json($place, 200);
 }
@@ -62,13 +62,22 @@ public function updatePlace(Request $request, $place_id)
         return response()->json(['error' => $validator->errors()], 422);
     }
 
-    $place = Place::findOrFail($place_id);
+    $place = Place::find($place_id);
     $place->update($validator->validated());
 
     return response()->json([
         'message' => 'Place updated successfully!',
         'place' => $place
     ], 200);
+}
+public function deletePlace($place_id)
+{
+    $place = Place::find($place_id);
+    if(!$place)
+    return response()->json(['message' => 'Place not found try again!'], 400);
+    
+    $place->delete();
+    return response()->json(['message' => 'Place deleted successfully!'], 200);
 }
 
 
