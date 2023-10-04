@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('place', function (Blueprint $table) {
+        Schema::create('places', function (Blueprint $table) {
             $table->bigIncrements('place_id')->primary();
             $table->unsignedBigInteger('category_id');
             $table->string('place_name');
             $table->string('place_location');
             $table->string('place_status');
             $table->string('place_details');
-            $table->string('place_preview_viedo');
+            $table->string('place_preview_video');
             
             $table->string('place_link');
             $table->foreign('category_id')->references('category_id')->on('category')->onDelete('cascade');
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('place');
+        Schema::dropIfExists('places');
     }
 };

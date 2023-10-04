@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('images', function (Blueprint $table) {
-            $table->bigIncrements('image_id');
+            $table->bigIncrements('image_id')->primary();
             $table->unsignedBigInteger('place_id');
             $table->string('image_path'); // This will store the file path or URL
             $table->timestamps();
-            $table->foreign('place_id')->references('place_id')->on('place')->onDelete('cascade');
+            $table->foreign('place_id')->references('place_id')->on('places')->onDelete('cascade');
             
    
         });

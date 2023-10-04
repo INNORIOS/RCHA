@@ -17,7 +17,7 @@ class placeController extends Controller
             'place_status' => 'required',
             'place_details' => 'required',
             'category_id'=> 'required',
-            'place_preview_viedo' => 'required',
+            'place_preview_video' => 'required',
             'place_link' => 'required',
             
         ]);
