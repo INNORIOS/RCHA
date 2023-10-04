@@ -40,6 +40,13 @@ class placeController extends Controller
 
     return response()->json($places, 200);
 }
+public function getPlaceById($place_id)
+{
+    $place = Place::findOrFail($place_id);
+
+    return response()->json($place, 200);
+}
+
 
 
 }
