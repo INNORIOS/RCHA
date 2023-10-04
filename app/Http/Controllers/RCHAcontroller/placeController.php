@@ -24,7 +24,7 @@ class placeController extends Controller
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 422);
         }
-           //else create a user
+           //else create a place
            $place = Place::create($validator->validated());
         return response()->json(
             [
@@ -34,5 +34,12 @@ class placeController extends Controller
             201
         );
     }
+    public function getPlaces()
+{
+    $places = Place::all();
+
+    return response()->json($places, 200);
+}
+
 
 }

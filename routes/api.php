@@ -41,5 +41,5 @@ Route::group(['middleware'=>'api','prefix'=>'auth'],function($router){
                 
                 Route::get('/send-email', [MailController::class,'sendEmail']);
 Route::post('/storeNewPlace',[placeController::class,'storePlace'])->name('storeNewPlace');
-
+Route::post('/upload-image',[imagesController::class,'createImage'])->name('upload-image');
 });
