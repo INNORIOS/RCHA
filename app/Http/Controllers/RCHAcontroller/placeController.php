@@ -46,6 +46,30 @@ public function getPlaceById($place_id)
 
     return response()->json($place, 200);
 }
+public function updatePlace(Request $request, $place_id)
+{
+    $validator = Validator::make($request->all(), [
+        'place_name' => 'required',
+        'place_location' => 'required',
+        'place_status' => 'required',
+        'place_details' => 'required',
+        'category_id'=> 'required',
+        'place_preview_viedo' => 'required', // Corrected field name
+        'place_link' => 'required',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json(['error' => $validator->errors()], 422);
+    }
+
+    $place = Place::findOrFail($place_id);
+    $place->update($validator->validated());
+
+    return response()->json([
+        'message' => 'Place updated successfully!',
+        'place' => $place
+    ], 200);
+}
 
 
 
