@@ -36,16 +36,19 @@ class placeController extends Controller
     }
     public function getPlaces()
 {
-    $places = Place::all();
-    if($places)
-    return response()->json($places, 200);
+    $place = Place::all();
+    if($place)
+    return response()->json($place, 200);
     return response()->json(['message' => 'Places are not found!'], 400);
 }
-public function getPlaceById($place_id)
+public function getPlaceById(Request $request,$place_id)
 {
     $place = Place::find($place_id);
-
-    return response()->json($place, 200);
+dd($place);
+    if ($place === null) {
+        return response()->json(['message' => 'Place not found try again!'], 400);
+      }
+      return response()->json($place, 200);
 }
 public function updatePlace(Request $request, $place_id)
 {

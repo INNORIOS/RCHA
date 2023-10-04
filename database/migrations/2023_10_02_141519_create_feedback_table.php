@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('feedback', function (Blueprint $table) {
             
-            $table->bigIncrements('feedback_id');
+            $table->bigIncrements('feedback_id')->primary();
             $table->string('comment');
             $table->string('rate');
     

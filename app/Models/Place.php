@@ -18,12 +18,7 @@ class Place extends Model
         'category_id',
         'place_preview_viedo',
         'place_link'
-        // 'place_image1',
-        // 'place_image2',
-        // 'place_image3',
-        // 'place_image4',
-        // 'place_image5',
-        // 'place_image6',
+       
         
     ];
     protected $guarded = [];

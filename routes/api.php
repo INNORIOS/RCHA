@@ -47,8 +47,8 @@ Route::post('/upload-image',[imagesController::class,'createImage'])->name('uplo
 
 /*  ROUTE FOR PLACE CONTROLLER API*/
 Route::post('/storeNewPlace',[placeController::class,'storePlace'])->name('storeNewPlace');
-Route::get('/places', [placeController::class, 'getPlaces'])->name('getAllPlaces');
-Route::get('/places/{place_id}', [placeController::class, 'getPlaceById'])->name('getPlaceById');
-Route::put('/places/{iplace_idd}', [placeController::class, 'updatePlace'])->name('updatePlace');
-Route::delete('/places/{place_id}', [placeController::class, 'deletePlace'])->name('deletePlace');
+Route::get('/places', [placeController::class, 'getPlaces']);
+Route::get('/place/{place_id}', [placeController::class, 'getPlaceById']);
+Route::put('/updatePlace/{place_id}', [placeController::class, 'updatePlace']);
+Route::delete('/deletePlace/{place_id}', [placeController::class, 'deletePlace']);
 });
