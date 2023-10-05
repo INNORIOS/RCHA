@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('place_id');
             $table->string('image_path'); // This will store the file path or URL
             $table->timestamps();
-            $table->foreign('place_id')->references('place_id')->on('places')->onDelete('cascade');
+            $table->foreign('place_id')->references('id')->on('places')->onDelete('cascade');
             
    
         });

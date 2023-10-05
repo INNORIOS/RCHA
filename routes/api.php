@@ -43,12 +43,14 @@ Route::group(['middleware'=>'api','prefix'=>'auth'],function($router){
                 Route::get('/send-email', [MailController::class,'sendEmail']);
 
 /*  ROUTE FOR IMAGE CONTROLLER API*/
-Route::post('/upload-image',[imagesController::class,'createImage'])->name('upload-image');
+// Route::post('/upload-image',[imagesController::class,'createImage']);
+Route::post('multiple-image-upload', [imagesController::class, 'createImage']);
+
 
 /*  ROUTE FOR PLACE CONTROLLER API*/
 Route::post('/storeNewPlace',[placeController::class,'storePlace'])->name('storeNewPlace');
 Route::get('/places', [placeController::class, 'getPlaces']);
-Route::get('/place/{place_id}', [placeController::class, 'getPlaceById']);
-Route::put('/updatePlace/{place_id}', [placeController::class, 'updatePlace']);
-Route::delete('/deletePlace/{place_id}', [placeController::class, 'deletePlace']);
+Route::get('/place/{id}', [placeController::class, 'getPlaceById']);
+Route::put('/updatePlace/{id}', [placeController::class, 'updatePlace']);
+Route::delete('/deletePlace/{id}', [placeController::class, 'deletePlace']);
 });

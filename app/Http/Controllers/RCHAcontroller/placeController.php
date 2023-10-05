@@ -44,29 +44,29 @@ class placeController extends Controller
 public function getPlaceById(Request $request,$place_id)
 {
     $place = Place::find($place_id);
-dd($place);
+//dd($place);
     if ($place === null) {
         return response()->json(['message' => 'Place not found try again!'], 400);
       }
       return response()->json($place, 200);
 }
-public function updatePlace(Request $request, $place_id)
+public function updatePlace(Request $request, $id)
 {
     $validator = Validator::make($request->all(), [
-        'place_name' => 'required',
-        'place_location' => 'required',
-        'place_status' => 'required',
-        'place_details' => 'required',
-        'category_id'=> 'required',
-        'place_preview_viedo' => 'required', 
-        'place_link' => 'required',
+        'place_name' => 'sometimes|required',
+        'place_location' => 'sometimes|required',
+        'place_status' => 'sometimes|required',
+        'place_details' => 'sometimes|required',
+        'category_id' => 'sometimes|required',
+        'place_preview_video' => 'sometimes|required', 
+        'place_link' => 'sometimes|required'
     ]);
 
     if ($validator->fails()) {
         return response()->json(['error' => $validator->errors()], 422);
     }
 
-    $place = Place::find($place_id);
+    $place = Place::find($id);
     $place->update($validator->validated());
 
     return response()->json([
@@ -74,9 +74,9 @@ public function updatePlace(Request $request, $place_id)
         'place' => $place
     ], 200);
 }
-public function deletePlace($place_id)
+public function deletePlace($id)
 {
-    $place = Place::find($place_id);
+    $place = Place::find($id);
     if(!$place)
     return response()->json(['message' => 'Place not found try again!'], 400);
     
