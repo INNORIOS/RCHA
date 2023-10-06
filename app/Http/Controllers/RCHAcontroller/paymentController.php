@@ -38,7 +38,11 @@ public function getPaymentInfo(){
     ->where('users.id', Auth::user()->id)
     ->select('users.email', 'users.phone_number', 'users.first_name', 'users.last_name', 'places.place_name', 'places.place_location', 'payments.amount');
     $results = $payInfoQuery->get();
-
+    if($results){
+        foreach ($results as $result) {
+        echo $result->email . ' ' . $result->phone_number . ' ' . $result->first_name . ' ' . $result->last_name . ' ' . $result->place_name . ' ' . $result->place_location . ' ' . $result->amount . PHP_EOL;
+    }
+    }
 }
 
 }
