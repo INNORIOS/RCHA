@@ -57,7 +57,7 @@ public function getPaymentInfo(){
     $results = $payInfoQuery->get();
     if($results){
         foreach ($results as $result) {
-        echo $result->email . ' ' . $result->phone_number . ' ' . $result->first_name . ' ' . $result->last_name . ' ' . $result->place_name . ' ' . $result->place_location . ' ' . $result->amount . PHP_EOL . ' ' . $result->paid_token;
+        echo $result->email . ' ' . $result->phone_number . ' ' . $result->first_name . ' ' . $result->last_name . ' ' . $result->place_name . ' ' . $result->place_location . ' ' . $result->amount . ' ' . $result->paid_token. PHP_EOL ;
     }
     }
 }
