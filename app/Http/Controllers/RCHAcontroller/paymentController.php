@@ -26,7 +26,8 @@ class paymentController extends Controller
         'payment' => $payment,
     ], 201);
     }
-
+    return response()->json([
+        'message' => 'Payment info is not saved!',], 422);
 
 }
 
