@@ -32,11 +32,12 @@ class paymentController extends Controller
 
 }
 public function getPaymentInfo(){
-    $query = DB::table('users')
+    $payInfoQuery = DB::table('users')
     ->join('payments', 'users.id', '=', 'payments.user_id')
     ->join('places', 'payments.place_id', '=', 'places.id')
     ->where('users.id', Auth::user()->id)
     ->select('users.email', 'users.phone_number', 'users.first_name', 'users.last_name', 'places.place_name', 'places.place_location', 'payments.amount');
+    $results = $payInfoQuery->get();
 
 }
 
