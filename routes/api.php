@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\RCHAcontroller\placeController;
 use App\Http\Controllers\RCHAcontroller\imagesController;
+use App\Http\Controllers\RCHAcontroller\paymentController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 
@@ -56,4 +57,7 @@ Route::get('/places', [placeController::class, 'getPlaces']);
 Route::get('/place/{id}', [placeController::class, 'getPlaceById']);
 Route::put('/updatePlace/{id}', [placeController::class, 'updatePlace']);
 Route::delete('/deletePlace/{id}', [placeController::class, 'deletePlace']);
+
+/** ROUTE FOR PAYMENT INFO CONTROLLER */
+Route::post('/savePaymentinfo',[paymentController::class,'payment']);
 });
