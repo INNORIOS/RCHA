@@ -5,6 +5,7 @@ namespace App\Http\Controllers\RCHAcontroller;
 use App\Models\Place;
 use App\Models\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,6 +29,14 @@ class paymentController extends Controller
     }
     return response()->json([
         'message' => 'Payment info is not saved!',], 422);
+
+}
+public function getPaymentInfo(){
+    $query = DB::table('users')
+    ->join('payments', 'users.id', '=', 'payments.user_id')
+    ->join('places', 'payments.place_id', '=', 'places.id')
+    ->where('users.id', Auth::user()->id)
+    ->select('users.email', 'users.phone_number', 'users.first_name', 'users.last_name', 'places.place_name', 'places.place_location', 'payments.amount');
 
 }
 
