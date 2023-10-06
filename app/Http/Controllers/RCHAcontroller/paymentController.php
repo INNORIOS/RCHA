@@ -19,7 +19,8 @@ class paymentController extends Controller
     $payment->user_id = $user->id;
     $payment->place_id = $place->id;
     $payment->amount = $request->get('amount');
-   
+    $payment->save();
+
    
 }
 
