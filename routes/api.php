@@ -60,4 +60,5 @@ Route::delete('/deletePlace/{id}', [placeController::class, 'deletePlace']);
 
 /** ROUTE FOR PAYMENT INFO CONTROLLER */
 Route::post('/savePaymentinfo',[paymentController::class,'payment']);
+Route::post('/getPaymentInfo',[paymentController::class,'getPaymentInfo']);
 });
