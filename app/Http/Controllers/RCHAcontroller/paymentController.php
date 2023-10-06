@@ -19,9 +19,15 @@ class paymentController extends Controller
     $payment->user_id = $user->id;
     $payment->place_id = $place->id;
     $payment->amount = $request->get('amount');
-    $payment->save();
+    if($payment) {
+     $payment->save();
+      return response()->json([
+        'message' => 'Payment created successfully!',
+        'payment' => $payment,
+    ], 201);
+    }
 
-   
+
 }
 
 }
