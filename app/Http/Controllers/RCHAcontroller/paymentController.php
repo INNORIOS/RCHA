@@ -22,12 +22,13 @@ class paymentController extends Controller
     $token = Token::find($request->get('token_id'));
     $place = Place::find($request->get('place_id'));
     $payment = new Payment();
-    $payment->user_id = 2;
-    $payment->place_id = 3;
-    $payment->token_id = 2;
-    $payment->amount = 1000;/*$request->get('amount');*/
+    $payment->user_id = $user->id;
+    $payment->place_id = $place->id;
+    $payment->token_id = $token->id;
+    $payment->amount =$request->get('amount');
+// dd($payment);
     if($payment) {
-        Log::info('Payment created');
+        //Log::info('Payment created');
      $payment->save();
       return response()->json([
         'message' => 'Payment created successfully!',
@@ -41,7 +42,7 @@ class paymentController extends Controller
     } catch (\Exception $e) {
         // Handle the exception
         Log::error('Exception occurred: ' . $e->getMessage());
-
+dd($e);
         return response()->json([
             'message' => 'An error occurred while processing your request.',
         ], 500);
