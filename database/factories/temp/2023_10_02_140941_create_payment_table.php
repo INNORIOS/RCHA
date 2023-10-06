@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('payment', function (Blueprint $table) {
             $table->bigIncrements('payment_id')->primary();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('palce_id');
+            $table->unsignedBigInteger('place_id');
             $table->unsignedBigInteger('token_id');
             $table->string('amount');
             $table->foreign('place_id')->references('id')->on('places')->onDelete('cascade');
