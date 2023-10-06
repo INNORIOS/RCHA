@@ -78,4 +78,24 @@ class flutterController extends Controller
             return response()->json(['message' => 'An error occurred during payment initiation'], 500);
         }
     }
+    public function callback()
+{
+try {
+   $status = request()->input('status');
+   if ($status == 'successful') {
+       $transactionID = Flutterwave::getTransactionIDFromCallback();
+       $data = Flutterwave::verifyTransaction($transactionID);
+   return response()->json(['message' => 'Payment Success'], 200);
+   //  return redirect(route("user.booking_history"));
+      } elseif ($status == 'cancelled') {
+       return response()->json(['message' => 'Payment cancelled'], 404);
+       //return redirect(route('page.detail'));
+   } else {
+      return response()->json(['message' => 'Payment failed'], 200);
+   }
+} catch (\Exception $e) {
+      dd($e);
+    return response()->json(['message' => 'An error occurred during payment callback'], 500);
+}
+}
 }
