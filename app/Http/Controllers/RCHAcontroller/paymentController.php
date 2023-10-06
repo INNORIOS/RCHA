@@ -13,7 +13,7 @@ class paymentController extends Controller
 {
     $user = Auth::user();
 
-    
+    $place = Place::find($request->get('place_id'));
 
    
 }
