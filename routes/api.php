@@ -61,4 +61,11 @@ Route::delete('/deletePlace/{id}', [placeController::class, 'deletePlace']);
 /** ROUTE FOR PAYMENT INFO CONTROLLER */
 Route::post('/savePaymentinfo',[paymentController::class,'payment']);
 Route::get('/getPaymentInfo',[paymentController::class,'getPaymentInfo']);
+
+
+/** ROUTE FOR FLUTTERWAVE PAYMENT CONTROLLER */
+// The route that the button calls to initialize payment
+Route::post('/pay', [FlutterwaveController::class, 'initialize'])->name('pay');
+// The callback url after a payment
+Route::get('/rave/callback', [FlutterwaveController::class, 'callback'])->name('callback');
 });
