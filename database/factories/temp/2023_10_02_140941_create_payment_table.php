@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('amount');
             $table->foreign('place_id')->references('id')->on('places')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('token_id')->references('id')->on('token')->onDelete('cascade');
+            $table->foreign('token_id')->references('id')->on('tokens')->onDelete('cascade');
             $table->timestamps();
         });
     }

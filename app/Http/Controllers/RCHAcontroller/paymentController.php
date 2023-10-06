@@ -26,10 +26,9 @@ class paymentController extends Controller
     $payment->place_id = $place->id;
     $payment->token_id = $token->id;
     $payment->amount =$request->get('amount');
-// dd($payment);
-    if($payment) {
-        //Log::info('Payment created');
-     $payment->save();
+
+    if($payment->save()) {
+     Log::info('Payment created');
       return response()->json([
         'message' => 'Payment created successfully!',
         'payment' => $payment,
@@ -42,7 +41,7 @@ class paymentController extends Controller
     } catch (\Exception $e) {
         // Handle the exception
         Log::error('Exception occurred: ' . $e->getMessage());
-dd($e);
+    dd($e);
         return response()->json([
             'message' => 'An error occurred while processing your request.',
         ], 500);
@@ -52,12 +51,13 @@ public function getPaymentInfo(){
     $payInfoQuery = DB::table('users')
     ->join('payments', 'users.id', '=', 'payments.user_id')
     ->join('places', 'payments.place_id', '=', 'places.id')
+    ->join('tokens', 'payments.token_id', '=', 'tokens.id')
     ->where('users.id', Auth::user()->id)
-    ->select('users.email', 'users.phone_number', 'users.first_name', 'users.last_name', 'places.place_name', 'places.place_location', 'payments.amount');
+    ->select('users.email', 'users.phone_number', 'users.first_name', 'users.last_name', 'places.place_name', 'places.place_location', 'payments.amount','tokens.paid_token');
     $results = $payInfoQuery->get();
     if($results){
         foreach ($results as $result) {
-        echo $result->email . ' ' . $result->phone_number . ' ' . $result->first_name . ' ' . $result->last_name . ' ' . $result->place_name . ' ' . $result->place_location . ' ' . $result->amount . PHP_EOL;
+        echo $result->email . ' ' . $result->phone_number . ' ' . $result->first_name . ' ' . $result->last_name . ' ' . $result->place_name . ' ' . $result->place_location . ' ' . $result->amount . PHP_EOL . ' ' . $result->paid_token;
     }
     }
 }
