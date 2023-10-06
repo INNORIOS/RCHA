@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Payment;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Token extends Model
 {
@@ -12,5 +13,9 @@ class Token extends Model
         'paid_token',
         'token_expires_at',
     ];
-    
+    protected $guarded = [];
+    public function payment()
+    {
+        return $this->hasMany(Payment::class);
+    }
 }

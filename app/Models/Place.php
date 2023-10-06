@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Image;
+use App\Models\Payment;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -31,4 +32,8 @@ class Place extends Model
 {
     return $this->hasMany(Image::class);
 }
+public function payment()
+    {
+        return $this->hasMany(Payment::class);
+    }
 }

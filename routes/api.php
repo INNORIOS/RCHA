@@ -45,6 +45,9 @@ Route::group(['middleware'=>'api','prefix'=>'auth'],function($router){
 /*  ROUTE FOR IMAGE CONTROLLER API*/
 // Route::post('/upload-image',[imagesController::class,'createImage']);
 Route::post('multiple-image-upload', [imagesController::class, 'createImage']);
+Route::PUT('/updateImage/{id}', [imagesController::class, 'updateImage']);
+Route::delete('/deleteImage/{id}', [imagesController::class, 'deleteImage']);
+Route::get('/getImageById/{id}', [imagesController::class, 'getImageById']);
 
 
 /*  ROUTE FOR PLACE CONTROLLER API*/
