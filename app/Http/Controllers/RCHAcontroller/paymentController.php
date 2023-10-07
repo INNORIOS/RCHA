@@ -36,7 +36,11 @@ public function generatePaidLink(Request $request)
     $token->token_expires_at = $tokenExpiresAt;
     $token->save();
 
- 
+    // Generate the paid link based on place_link and paid_token
+    $paidLink = $place->place_link . '/' . $paidToken;
+
+    return $paidLink;
+   
 }
 
         public function payment(Request $request)
