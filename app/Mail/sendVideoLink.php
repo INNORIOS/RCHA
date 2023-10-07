@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Mail;
-
-use App\Models\Payment;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -16,20 +15,20 @@ class sendVideoLink extends Mailable
 
     /**
      * Create a new message instance.
-     * @var Payment
+     * @var User
      */
-    private $payment;
-    public function __construct(Payment $payment)
+    private $user;
+    public function __construct(User $user)
     {
-        $this->payment =$payment;
+        $this->user =$user;
     }
     public function build()
     {
-        // return $this->from('munyinyaTech@gmail.com','Munyinya Shema Maurice')
-        // ->subject($this->data['subject'])->view('emails.index')
-        // ->view('emails.index')->with('data',$this->data);
-       // return $this->view('sendVideoLinkView');
-       return $this->markdown('sendVideoLink.sendVideoLinkView');
+        
+       return $this
+       ->subject('Welcome to RCHA site')
+       ->markdown('sendVideoLink.sendVideoLinkView',
+    ['name'=> $this->user->first_name]);
     }
     /**
      * Get the message envelope.
