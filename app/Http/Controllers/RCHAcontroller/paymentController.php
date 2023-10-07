@@ -27,7 +27,7 @@ public function generatePaidLink(Request $request)
             'message' => 'Place not found!',
         ], 404);
     }
-
+    $paidToken = Str::random(32); // Generate a random token
    
 }
 
