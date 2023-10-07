@@ -71,11 +71,10 @@ Route::post('/pay', [flutterController::class, 'initialize'])->name('pay');
 // The callback url after a payment
 Route::get('/rave/callback', [flutterController::class, 'callback'])->name('callback');
 
-
-});
 /** ROUTE FOR sendVideoLink AFTER PAYMENT */
 if(\Illuminate\Support\Facades\App::environment('local')){
     Route::get('/sendVideoLinkView',function(){
     return (new \App\Mail\sendVideoLink())->render();
     });
     }
+});

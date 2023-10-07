@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Payment;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -15,11 +16,12 @@ class sendVideoLink extends Mailable
 
     /**
      * Create a new message instance.
+     * @var Payment
      */
-   // private $data = [];
-    public function __construct()
+    private $payment;
+    public function __construct(Payment $payment)
     {
-       // $this->data =$data;
+        $this->payment =$payment;
     }
     public function build()
     {
