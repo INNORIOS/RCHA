@@ -15,35 +15,26 @@ class paymentController extends Controller
 {
    
 
-public function generatePaidLink($placeId)
+public function generatePaidLink(Request $request)
 {
-    // Assuming you have a Place model and Token model imported
-    $place = Place::find($placeId);
+   // $place = Place::find($placeId);
+    $user = Auth::user();
+    $place = Place::find($request->get('place_id'));
 
     if (!$place) {
-        return null; // Handle invalid place ID
+         // Handle invalid place ID
+         return response()->json([
+            'message' => 'Place not found!',
+        ], 404);
     }
 
-    $paidToken = Str::random(32); // Generate a random token
-    $tokenExpiresAt = now()->addHours(24); // Set token expiry to 24 hours from now
-
-    // Save the paid token in the tokens table
-    $token = new Token();
-    $token->paid_token = $paidToken;
-    $token->token_expires_at = $tokenExpiresAt;
-    $token->save();
-
-    // Generate the paid link based on place_link and paid_token
-    $paidLink = $place->place_link . '/' . $paidToken;
-
-    return $paidLink;
+   
 }
 
         public function payment(Request $request)
 {
     
     try{
-        //return response()->json([auth()->user()]);
     $user = Auth::user();
     $token = Token::find($request->get('token_id'));
     $place = Place::find($request->get('place_id'));
