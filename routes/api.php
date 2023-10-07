@@ -69,4 +69,8 @@ Route::get('/getPaymentInfo',[paymentController::class,'getPaymentInfo']);
 Route::post('/pay', [flutterController::class, 'initialize'])->name('pay');
 // The callback url after a payment
 Route::get('/rave/callback', [flutterController::class, 'callback'])->name('callback');
+
+/** ROUTE FOR sendVideoLink AFTER PAYMENT */
+
+
 });
