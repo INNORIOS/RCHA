@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\RCHAcontroller;
-
+use Illuminate\Support\Str;
 use App\Models\Place;
 use App\Models\Payment;
 use Illuminate\Http\Request;
@@ -13,7 +13,33 @@ use Illuminate\Support\Facades\Log;
 
 class paymentController extends Controller
 {
-    public function payment(Request $request)
+   
+
+public function generatePaidLink($placeId)
+{
+    // Assuming you have a Place model and Token model imported
+    $place = Place::find($placeId);
+
+    if (!$place) {
+        return null; // Handle invalid place ID
+    }
+
+    $paidToken = Str::random(32); // Generate a random token
+    $tokenExpiresAt = now()->addHours(24); // Set token expiry to 24 hours from now
+
+    // Save the paid token in the tokens table
+    $token = new Token();
+    $token->paid_token = $paidToken;
+    $token->token_expires_at = $tokenExpiresAt;
+    $token->save();
+
+    // Generate the paid link based on place_link and paid_token
+    $paidLink = $place->place_link . '/' . $paidToken;
+
+    return $paidLink;
+}
+
+        public function payment(Request $request)
 {
     
     try{
