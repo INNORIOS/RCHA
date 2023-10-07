@@ -18,6 +18,8 @@ class sendVideoLink extends Mailable
      * @var User
      */
     private $user;
+    private $paidLink;
+
     public function __construct(User $user)
     {
         $this->user =$user;

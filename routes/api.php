@@ -76,8 +76,6 @@ Route::get('/rave/callback', [flutterController::class, 'callback'])->name('call
 /** ROUTE FOR sendVideoLink AFTER PAYMENT */
 Route::get('/sendVideoLinkView',function(){
     $user=Auth::user()->email;
-    // \Illuminate\Support\Facades\Mail::to($user)
-    //     ->send(new \App\Mail\sendVideoLink($user));
     \Illuminate\Support\Facades\Mail::to(Auth::user()->email)
     ->send(new \App\Mail\sendVideoLink(Auth::user()));
    
