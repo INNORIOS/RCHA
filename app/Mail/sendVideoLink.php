@@ -26,6 +26,7 @@ class sendVideoLink extends Mailable
         // return $this->from('munyinyaTech@gmail.com','Munyinya Shema Maurice')
         // ->subject($this->data['subject'])->view('emails.index')
         // ->view('emails.index')->with('data',$this->data);
+        return $this->view('sendVideoLink.sendVideoLink');
     }
     /**
      * Get the message envelope.
