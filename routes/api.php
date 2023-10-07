@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\RCHAcontroller\placeController;
 use App\Http\Controllers\RCHAcontroller\imagesController;
+use App\Http\Controllers\paymentGatways\flutterController;
 use App\Http\Controllers\RCHAcontroller\paymentController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
@@ -65,7 +66,7 @@ Route::get('/getPaymentInfo',[paymentController::class,'getPaymentInfo']);
 
 /** ROUTE FOR FLUTTERWAVE PAYMENT CONTROLLER */
 // The route that the button calls to initialize payment
-Route::post('/pay', [FlutterwaveController::class, 'initialize'])->name('pay');
+Route::post('/pay', [flutterController::class, 'initialize'])->name('pay');
 // The callback url after a payment
-Route::get('/rave/callback', [FlutterwaveController::class, 'callback'])->name('callback');
+Route::get('/rave/callback', [flutterController::class, 'callback'])->name('callback');
 });

@@ -26,13 +26,13 @@ class flutterController extends Controller
     //     foreach ($results as $result) {
     //     echo 
     // }
-
+        Auth::user()->id;
         $email=$request->get('email');
         
-        $phone_number = $request->get('phone_number');
-    
         $user_name = $request->get('first_name') .' '.$request->get('last_name');
         
+        $phone_number = $request->get('phone_number');
+
         $place_name = $request->get('place_name');
          
         $place_location = $request->get('place_location'); 
@@ -71,21 +71,24 @@ class flutterController extends Controller
              
                return response()->json(['message' => 'Payment initiation failed'], 422);  
             }
+            return ($payment['data']['link']);
             //  return redirect(['paymentLink' => $payment['data']['link'], Auth::user()->id]);
-            return redirect([$payment['data']['link'], Auth::user()->id]);
+            
           } catch (\Exception $e) {
           dd($e);
             return response()->json(['message' => 'An error occurred during payment initiation'], 500);
         }
     }
     public function callback()
-{
+{   
 try {
+    
    $status = request()->input('status');
    if ($status == 'successful') {
        $transactionID = Flutterwave::getTransactionIDFromCallback();
        $data = Flutterwave::verifyTransaction($transactionID);
-   return response()->json(['message' => 'Payment Success'], 200);
+   return response()->json(['message' =>' Your Payment is Successfuly!'], 200);
+   //return route('/getPaymentInfo');
    //  return redirect(route("user.booking_history"));
       } elseif ($status == 'cancelled') {
        return response()->json(['message' => 'Payment cancelled'], 404);
