@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
+
 //use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -70,7 +71,11 @@ Route::post('/pay', [flutterController::class, 'initialize'])->name('pay');
 // The callback url after a payment
 Route::get('/rave/callback', [flutterController::class, 'callback'])->name('callback');
 
-/** ROUTE FOR sendVideoLink AFTER PAYMENT */
-
 
 });
+/** ROUTE FOR sendVideoLink AFTER PAYMENT */
+if(\Illuminate\Support\Facades\App::environment('local')){
+    Route::get('/sendVideoLinkView',function(){
+    return (new \App\Mail\sendVideoLink())->render();
+    });
+    }
