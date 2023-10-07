@@ -17,7 +17,7 @@ class paymentController extends Controller
 
 public function generatePaidLink(Request $request)
 {
-   // $place = Place::find($placeId);
+   try{// $place = Place::find($placeId);
     $user = Auth::user();
     $place = Place::find($request->get('place_id'));
 
@@ -40,6 +40,13 @@ public function generatePaidLink(Request $request)
     $paidLink = $place->place_link . '/' . $paidToken;
 
     return $paidLink;
+}catch(\Exception $e){
+    Log::error('Exception occurred: ' . $e->getMessage());
+    //dd($e);
+        return response()->json([
+            'message' => 'An error occurred while processing your request about generatePaidLink.',
+        ], 500);
+}
    
 }
 
@@ -70,7 +77,7 @@ public function generatePaidLink(Request $request)
     } catch (\Exception $e) {
         // Handle the exception
         Log::error('Exception occurred: ' . $e->getMessage());
-    dd($e);
+    //dd($e);
         return response()->json([
             'message' => 'An error occurred while processing your request.',
         ], 500);
