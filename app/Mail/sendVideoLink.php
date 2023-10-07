@@ -31,7 +31,8 @@ class sendVideoLink extends Mailable
        return $this
        ->subject('Welcome to RCHA site')
        ->markdown('sendVideoLink.sendVideoLinkView',
-    ['name'=> $this->user->first_name,'paidLink' => $this->paidLink,]);
+    ['name'=> $this->user->last_name,
+    'paidLink' => $this->paidLink,]);
     }
     /**
      * Get the message envelope.

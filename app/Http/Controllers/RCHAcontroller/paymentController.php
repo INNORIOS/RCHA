@@ -20,7 +20,7 @@ public function generatePaidLink(Request $request)
    try{// $place = Place::find($placeId);
     $user = Auth::user();
     $place = Place::find($request->get('place_id'));
-
+    //$place_id = $request->input('place_id');
     if (!$place) {
          // Handle invalid place ID
          return response()->json([
@@ -38,6 +38,7 @@ public function generatePaidLink(Request $request)
 
     // Generate the paid link based on place_link and paid_token
     $paidLink = $place->place_link . '/' . $paidToken;
+    $place_id = $place->place_link;
     return response()->json([
         'message'=>'paid link is created',
         'paidLink'=>$paidLink,

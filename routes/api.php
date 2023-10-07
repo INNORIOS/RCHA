@@ -74,14 +74,34 @@ Route::post('/pay', [flutterController::class, 'initialize'])->name('pay');
 Route::get('/rave/callback', [flutterController::class, 'callback'])->name('callback');
 
 /** ROUTE FOR sendVideoLink AFTER PAYMENT */
-Route::get('/sendVideoLinkView',function(){
-    $user=Auth::user()->email;
-    \Illuminate\Support\Facades\Mail::to(Auth::user()->email)
-    ->send(new \App\Mail\sendVideoLink(Auth::user()));
+// Route::get('/sendVideoLinkView',function(){
+//     $user=Auth::user()->email;
+//     \Illuminate\Support\Facades\Mail::to(Auth::user()->email)
+//     ->send(new \App\Mail\sendVideoLink(Auth::user()));
    
-    return null;
+//     return null;
     
-    });
+//     });
+Route::post('/sendVideoLinkView', function (Request $request) {
+    $user = Auth::user();
+    $place_id = $request->input('place_id');
+
+    // Call the generatePaidLink method with a request object
+    $paidLinkResponse = app('App\Http\Controllers\RCHAcontroller\paymentController')->generatePaidLink($request);
+
+    // Get the JSON data from the response
+    $data = $paidLinkResponse->getData();
+
+    if (isset($data->paidLink)) {
+        \Illuminate\Support\Facades\Mail::to($user->email)
+            ->send(new \App\Mail\sendVideoLink($user, $data->paidLink));
+
+        return 'Email sent successfully!';
+    }
+
+    return 'Error generating paid link';
+});
+
 });
 
     
