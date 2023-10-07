@@ -20,9 +20,10 @@ class sendVideoLink extends Mailable
     private $user;
     private $paidLink;
 
-    public function __construct(User $user)
+    public function __construct(User $user,$paidLink)
     {
         $this->user =$user;
+        $this->paidLink = $paidLink;
     }
     public function build()
     {
@@ -30,7 +31,7 @@ class sendVideoLink extends Mailable
        return $this
        ->subject('Welcome to RCHA site')
        ->markdown('sendVideoLink.sendVideoLinkView',
-    ['name'=> $this->user->first_name]);
+    ['name'=> $this->user->first_name,'paidLink' => $this->paidLink,]);
     }
     /**
      * Get the message envelope.
