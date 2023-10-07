@@ -38,8 +38,11 @@ public function generatePaidLink(Request $request)
 
     // Generate the paid link based on place_link and paid_token
     $paidLink = $place->place_link . '/' . $paidToken;
-
-    return $paidLink;
+    return response()->json([
+        'message'=>'paid link is created',
+        'paidLink'=>$paidLink,
+    ]);
+     
 }catch(\Exception $e){
     Log::error('Exception occurred: ' . $e->getMessage());
     //dd($e);

@@ -63,6 +63,8 @@ Route::delete('/deletePlace/{id}', [placeController::class, 'deletePlace']);
 /** ROUTE FOR PAYMENT INFO CONTROLLER */
 Route::post('/savePaymentinfo',[paymentController::class,'payment']);
 Route::get('/getPaymentInfo',[paymentController::class,'getPaymentInfo']);
+Route::post('/generatePaidLink',[paymentController::class,'generatePaidLink']);
+
 
 
 /** ROUTE FOR FLUTTERWAVE PAYMENT CONTROLLER */
@@ -71,10 +73,8 @@ Route::post('/pay', [flutterController::class, 'initialize'])->name('pay');
 // The callback url after a payment
 Route::get('/rave/callback', [flutterController::class, 'callback'])->name('callback');
 
-
-});
 /** ROUTE FOR sendVideoLink AFTER PAYMENT */
-    Route::get('/sendVideoLinkView',function(){
+Route::get('/sendVideoLinkView',function(){
     $user=Auth::user()->email;
     // \Illuminate\Support\Facades\Mail::to($user)
     //     ->send(new \App\Mail\sendVideoLink($user));
@@ -84,4 +84,6 @@ Route::get('/rave/callback', [flutterController::class, 'callback'])->name('call
     return null;
     
     });
+});
+
     
