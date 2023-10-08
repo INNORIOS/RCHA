@@ -36,10 +36,12 @@ public function generatePaidLink(Request $request)
     $token = new Token();
     $token->paid_token = $paidToken;
     $token->token_expires_at = $tokenExpiresAt;
+    $token->timestamp = $timestamp;
     $token->save();
 
     // Generate the paid link based on place_link and paid_token
-    $paidLink = $place->place_link . '/' . $paidToken;
+    // $paidLink = $place->place_link . '/' . $paidToken;
+    $paidLink = $place->place_link . '/' . $paidToken . '?timestamp=' . $timestamp;
     $place_id = $place->place_link;
     return response()->json([
         'message'=>'paid link is created',
