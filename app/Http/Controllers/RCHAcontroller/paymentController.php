@@ -30,6 +30,7 @@ public function generatePaidLink(Request $request)
     $paidToken = Str::random(32); // Generate a random token
     //$tokenExpiresAt = now()->addHours(24); // Set token expiry to 24 hours from now
     $tokenExpiresAt = now()->addMinutes(1); //Set token expiry to 1 minutes from now
+    $timestamp = now()->timestamp;
 
     // Save the paid token in the tokens table
     $token = new Token();
