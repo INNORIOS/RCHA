@@ -2,7 +2,7 @@
 # Welcome {{ Auth::user()->last_name }}!!
 
 {{-- @component('mail::button', ['url' => $paidLink]) --}}
-@component('mail::button', ['url' => url("/processPaidLink/{$paidLink}")])
+@component('mail::button', ['url' => url("/processPaidLink/{$token}")])
 Click here to watch
 @endcomponent
 @component('mail::panel')
