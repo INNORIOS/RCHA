@@ -69,6 +69,7 @@ Route::get('/processPaidLink/{token}', [paymentController::class, 'processPaidLi
 
 
 
+
 /** ROUTE FOR FLUTTERWAVE PAYMENT CONTROLLER */
 // The route that the button calls to initialize payment
 Route::post('/pay', [flutterController::class, 'initialize'])->name('pay');
