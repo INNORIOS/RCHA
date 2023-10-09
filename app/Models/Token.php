@@ -12,7 +12,7 @@ class Token extends Model
     protected $fillable = [
         'paid_token',
         'token_expires_at',
-        'timestamp',
+        // 'timestamp',
     ];
     protected $guarded = [];
     public function payment()

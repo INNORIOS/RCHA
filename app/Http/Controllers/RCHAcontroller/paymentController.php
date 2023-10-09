@@ -30,18 +30,18 @@ public function generatePaidLink(Request $request)
     $paidToken = Str::random(32); // Generate a random token
     //$tokenExpiresAt = now()->addHours(24); // Set token expiry to 24 hours from now
     $tokenExpiresAt = now()->addMinutes(1); //Set token expiry to 1 minutes from now
-    $timestamp = now()->timestamp;
+    //$timestamp = now()->timestamp;
 
     // Save the paid token in the tokens table
     $token = new Token();
     $token->paid_token = $paidToken;
     $token->token_expires_at = $tokenExpiresAt;
-    $token->timestamp = $timestamp;
+    // $token->timestamp = $timestamp;
     $token->save();
 
     // Generate the paid link based on place_link and paid_token
-    // $paidLink = $place->place_link . '/' . $paidToken;
-    $paidLink = $place->place_link . '/' . $paidToken . '?timestamp=' . $timestamp;
+     $paidLink = $place->place_link . '/' . $paidToken;
+    //$paidLink = $place->place_link . '/' . $paidToken . '?timestamp=' . $timestamp;
     $place_id = $place->place_link;
     return response()->json([
         'message'=>'paid link is created',

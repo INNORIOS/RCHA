@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('paid_token');
             $table->timestamp('token_expires_at');
             $table->timestamps();
-            $table->timestamp('timestamp');
+            // $table->timestamp('timestamp');
         });
     }
 
