@@ -56,6 +56,15 @@ public function generatePaidLink(Request $request)
 }
    
 }
+public function processPaidLink($token)
+{
+    
+
+    // Proceed with processing the payment
+
+    // Assuming you have some logic here to handle payment processing
+    // ...
+}
 
         public function payment(Request $request)
 {
