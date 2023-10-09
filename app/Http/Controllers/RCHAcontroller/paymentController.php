@@ -64,7 +64,8 @@ public function processPaidLink($token)
         // Token is invalid or expired
         return response()->json(['message' => 'Invalid or expired token'], 422);
     }
-   // return redirect(route(''))
+    // Redirect the user to the paid_link
+    return redirect($token->paid_link);
 }
 
         public function payment(Request $request)
