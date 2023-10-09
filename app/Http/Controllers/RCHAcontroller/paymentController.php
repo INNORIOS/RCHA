@@ -58,12 +58,13 @@ public function generatePaidLink(Request $request)
 }
 public function processPaidLink($token)
 {
-  
+    $token = Token::where('paid_token', $token)->first();
 
-    // Proceed with processing the payment
+    if (!$token || $token->token_expires_at->isPast()) {
+        // Token is invalid or expired
+        return response()->json(['message' => 'Invalid or expired token'], 422);
+    }
 
-    // Assuming you have some logic here to handle payment processing
-    // ...
 }
 
         public function payment(Request $request)
