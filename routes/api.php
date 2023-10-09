@@ -64,6 +64,8 @@ Route::delete('/deletePlace/{id}', [placeController::class, 'deletePlace']);
 Route::post('/savePaymentinfo',[paymentController::class,'payment']);
 Route::get('/getPaymentInfo',[paymentController::class,'getPaymentInfo']);
 Route::post('/generatePaidLink',[paymentController::class,'generatePaidLink']);
+Route::get('/processPaidLink/{token}', [paymentController::class, 'processPaidLink']);
+
 
 
 
