@@ -63,7 +63,9 @@ public function generatePaidLink(Request $request)
 public function getPaidToken($paidToken)
 {   
     try{
-    //dd($paidToken);
+    // Decode the token to get user information
+    $user = JWTAuth::parseToken()->authenticate();
+
     $token = Token::where('paid_token', $paidToken)->first();
     // dd($token, $token->token_expires_at);
 // dd($token->id);
