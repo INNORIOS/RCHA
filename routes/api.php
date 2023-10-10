@@ -87,28 +87,56 @@ Route::get('/rave/callback', [flutterController::class, 'callback'])->name('call
 //     return null;
     
 //     });
+// Route::post('/sendVideoLinkView', function (Request $request) {
+//     try{
+//     $user = Auth::user();
+//     $place_id = $request->input('place_id');
+
+//     // Call the generatePaidLink method with a request object
+//     $paidLinkResponse = app('App\Http\Controllers\RCHAcontroller\paymentController')->generatePaidLink($request);
+
+//     // Get the JSON data from the response
+//     $data = $paidLinkResponse->getData();
+// //dd($data->paidToken);
+//     if (isset($data->paidToken)) {
+//         \Illuminate\Support\Facades\Mail::to($user->email)
+//             ->send(new \App\Mail\sendVideoLink($user, $data->paidToken));
+
+//         return 'Email sent successfully!';
+//     }
+
+//     return 'Error generating paid link';
+// }catch(\Exception $e){
+//     Log::error('Exception occurred: ' . $e->getMessage());}
+// });
 Route::post('/sendVideoLinkView', function (Request $request) {
-    try{
-    $user = Auth::user();
-    $place_id = $request->input('place_id');
+    try {
+        $user = Auth::user();
+        $place_id = $request->input('place_id');
 
-    // Call the generatePaidLink method with a request object
-    $paidLinkResponse = app('App\Http\Controllers\RCHAcontroller\paymentController')->generatePaidLink($request);
+        // Call the generatePaidLink method with a request object
+        $paidLinkResponse = app('App\Http\Controllers\RCHAcontroller\paymentController')->generatePaidLink($request);
 
-    // Get the JSON data from the response
-    $data = $paidLinkResponse->getData();
-//dd($data->paidToken);
-    if (isset($data->paidToken)) {
-        \Illuminate\Support\Facades\Mail::to($user->email)
-            ->send(new \App\Mail\sendVideoLink($user, $data->paidToken));
+        // Get the JSON data from the response
+        $data = $paidLinkResponse->getData();
 
-        return 'Email sent successfully!';
+        if (isset($data->paidToken)) {
+            \Illuminate\Support\Facades\Mail::to($user->email)
+                ->send(new \App\Mail\sendVideoLink($user, $data->paidToken));
+
+            return 'Email sent successfully!';
+        }
+
+        return 'Error generating paid link';
+
+    } catch(\Exception $e) {
+        Log::error('Exception occurred: ' . $e->getMessage());
+        return response()->json([
+            'message' => 'An error occurred while sending the token.',
+        ], 500);
     }
-
-    return 'Error generating paid link';
-}catch(\Exception $e){
-    Log::error('Exception occurred: ' . $e->getMessage());}
 });
+
 
 
 });
