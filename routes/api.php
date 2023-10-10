@@ -16,6 +16,7 @@ use App\Http\Controllers\paymentGatways\flutterController;
 use App\Http\Controllers\RCHAcontroller\paymentController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
+use Illuminate\Support\Facades\Log;
 
 Auth::routes([
     'verify'=>true
@@ -64,8 +65,9 @@ Route::delete('/deletePlace/{id}', [placeController::class, 'deletePlace']);
 Route::post('/savePaymentinfo',[paymentController::class,'payment']);
 Route::get('/getPaymentInfo',[paymentController::class,'getPaymentInfo']);
 Route::post('/generatePaidLink',[paymentController::class,'generatePaidLink']);
-Route::get('/processPaidLink/{token}', [paymentController::class, 'processPaidLink']);
+Route::get('/processPaidLinks/{id}',[paymentController::class,'processPaidLink']);
 
+Route::get('/getPaidToken/{paid_token}',[paymentController::class,'getPaidToken']);
 
 
 
@@ -86,6 +88,7 @@ Route::get('/rave/callback', [flutterController::class, 'callback'])->name('call
     
 //     });
 Route::post('/sendVideoLinkView', function (Request $request) {
+    try{
     $user = Auth::user();
     $place_id = $request->input('place_id');
 
@@ -94,16 +97,19 @@ Route::post('/sendVideoLinkView', function (Request $request) {
 
     // Get the JSON data from the response
     $data = $paidLinkResponse->getData();
-
-    if (isset($data->paidLink)) {
+//dd($data->paidToken);
+    if (isset($data->paidToken)) {
         \Illuminate\Support\Facades\Mail::to($user->email)
-            ->send(new \App\Mail\sendVideoLink($user, $data->paidLink));
+            ->send(new \App\Mail\sendVideoLink($user, $data->paidToken));
 
         return 'Email sent successfully!';
     }
 
     return 'Error generating paid link';
+}catch(\Exception $e){
+    Log::error('Exception occurred: ' . $e->getMessage());}
 });
+
 
 });
 
