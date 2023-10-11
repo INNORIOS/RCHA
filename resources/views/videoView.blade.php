@@ -22,9 +22,10 @@
 <body>
     <h1>Paid Video View</h1>
    
-    <video controls>
-        <source src="/videoView/{{ $token }}" type="video/mp4">
-      </video>
+    <p>
+        {{-- <source src="/videoView/{{ $token }}" type="video/mp4"> --}}
+            {{ $embed }}
+            </p>
 </div>
 </body>
 </html> 
