@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\RCHAcontroller;
 // use JWTAuth;
 // use Carbon\Carbon;
+use Cohensive\OEmbed\Facades\OEmbed;
 use session;
 use Carbon\Carbon;
 use App\Models\Place;
@@ -256,7 +257,12 @@ public function validatePaidToken($paidToken)
     // return view('videoView', ['paidLink' => $token->paid_link]);
     // return view('videoView', ['token' => $token]);
     //dd($token->paid_link);
-    return view('videoView')->with(['token' => $token->paid_link]);
+    $embed = OEmbed::get($token->paid_link);
+    if($embed){
+        return $embed->html(['width => 300']);
+    }
+    
+    //return view('videoView')->with(['token' => $token->paid_link]);
         //return response()->json(['message' => 'Valid token'], 200);
     } catch (\Exception $e) {
         Log::error('Exception occurred: ' . $e->getMessage());
