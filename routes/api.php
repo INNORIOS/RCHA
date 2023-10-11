@@ -67,9 +67,12 @@ Route::get('/getPaymentInfo',[paymentController::class,'getPaymentInfo']);
 Route::post('/generatePaidLink',[paymentController::class,'generatePaidLink']);
 Route::get('/processPaidLinks/{id}',[paymentController::class,'processPaidLink']);
 
-Route::get('/getPaidToken/{paid_token}',[paymentController::class,'getPaidToken']);
+// Route::get('/getPaidToken/{paid_token}',[paymentController::class,'validatePaidToken']);
 
-
+// Route::get('videoView',function(){
+//         return view('videoView');
+//     })->name('videoView');
+Route::get('/videoView/{paidToken}', [paymentController::class, 'validatePaidToken']);
 
 
 /** ROUTE FOR FLUTTERWAVE PAYMENT CONTROLLER */

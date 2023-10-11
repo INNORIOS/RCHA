@@ -13,6 +13,7 @@ class Token extends Model
         'paid_token',
         'token_expires_at',
         'paid_link',
+        //'created_at',
     ];
     protected $guarded = [];
     public function payment()
