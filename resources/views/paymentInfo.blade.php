@@ -15,17 +15,49 @@
         padding:0;
         font-family: "Helvitica",sans-serif;
     }
+    #filters{
+        margin-left: 10%;
+        margin-top: 2%;
+        margin-bottom:2%
+    }
     <div id="filters">
+        <span> Select how to sort &nbsp;  </span>
 <select name="fetchval" id="fetchval"></select>
 <option value="" disabled="" selected="">Select filter</option>
 <option value="">first_name</option>
-<option value="">Last_name</option>
 <option value="">Email</option>
-<option value="">Phone number</option>
-<option value="">Place name</option>
-<option value="">place locatoin</option>
-<option value="">Token id</option>
-<option value=""> Amount</option>
+<option value="">created date</option>
+
+    </div>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>first_name</th>
+                    <th>Last name</th>
+                    <th>Email</th>
+                    <th>Phone number</th>
+                    <th>place locatoin</th>
+                    <th>Token id</th>
+                    <th>Amount</th>
+                    <th>created date</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+
     </div>
 </body>
 </html>

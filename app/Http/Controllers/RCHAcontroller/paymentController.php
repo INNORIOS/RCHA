@@ -341,11 +341,11 @@ public function getPaymentInfo(){
     ->join('places', 'payments.place_id', '=', 'places.id')
     ->join('tokens', 'payments.token_id', '=', 'tokens.id')
     ->where('users.id', $user->id)
-    ->select('users.email', 'users.phone_number', 'users.first_name', 'users.last_name', 'places.place_name', 'places.place_location', 'payments.amount','tokens.paid_token');
+    ->select('users.email', 'users.phone_number', 'users.first_name', 'users.last_name', 'places.place_name', 'places.place_location', 'payments.amount','payments.created_at','tokens.paid_token');
     $results = $payInfoQuery->get();
     if($results){
         foreach ($results as $result) {
-        echo $result->email . ' ' . $result->phone_number . ' ' . $result->first_name . ' ' . $result->last_name . ' ' . $result->place_name . ' ' . $result->place_location . ' ' . $result->amount . ' ' . $result->paid_token. PHP_EOL ;
+        echo $result->email . ' ' . $result->phone_number . ' ' . $result->first_name . ' ' . $result->last_name . ' ' . $result->place_name . ' ' . $result->place_location . ' ' . $result->amount . ' ' . $result->paid_token.' '.$result->created_at. PHP_EOL ;
     }
     }
 }
