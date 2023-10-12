@@ -45,15 +45,18 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach($paymentInfo as $info)
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{ $info->first_name }}</td>
+                    <td>{{ $info->last_name }}</td>
+                    <td>{{ $info->email }}</td>
+                    <td>{{ $info->phone_number }}</td>
+                    <td>{{ $info->place_location }}</td>
+                    <td>{{ $info->paid_token }}</td>
+                    <td>{{ $info->amount }}</td>
+                    <td>{{ $info->created_at }}</td>
                 </tr>
+                @endforeach
             </tbody>
         </table>
 
