@@ -22,10 +22,12 @@
 <body>
     <h1>Paid Video View</h1>
    
-    <p>
-        {{-- <source src="/videoView/{{ $token }}" type="video/mp4"> --}}
-            {{ $embed }}
-            </p>
+    <iframe src="http://www.youtube.com/embed/{{$token}}" class="btn btn-primary" style="width:100%; height:100%; border:none; overflow:auto; scrollbar-width: thin;" allowfullscreen>View Video</iframe>
+    {{-- <video controls>
+        
+          <source src="{{ $token->paid_link }}" type="video/mp4">
+          </video> --}}
+            {{-- <source src="/videoView/{{ $token }}" type="video/mp4"> --}}
 </div>
 </body>
 </html> 

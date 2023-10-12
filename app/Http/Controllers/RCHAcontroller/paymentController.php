@@ -3,20 +3,22 @@
 namespace App\Http\Controllers\RCHAcontroller;
 // use JWTAuth;
 // use Carbon\Carbon;
+use view;
 use session;
 use Carbon\Carbon;
 use App\Models\Place;
 use App\Models\Token;
 use App\Models\Payment;
+// use Cohensive\OEmbed\OEmbed;
+use Cohensive\OEmbed\Embed;
 use Illuminate\Support\Str;
-use Cohensive\OEmbed\OEmbed;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use Cohensive\OEmbed\Facades\OEmbed;
 use Tymon\JWTAuth\Contracts\Providers\Auth;
-
 
 class paymentController extends Controller
 {
@@ -207,7 +209,7 @@ public function generatePaidLink(Request $request)
 
         $paidToken = Str::random(32);
         // Set the token expiration time to 1 minutes from now
-        $tokenExpiresAt = Carbon::now()->addMinutes(3);
+        $tokenExpiresAt = Carbon::now()->addMinutes(20);
 
         $token = new Token();
         $token->paid_token = $paidToken;
@@ -257,10 +259,33 @@ public function validatePaidToken($paidToken)
     // return view('videoView', ['paidLink' => $token->paid_link]);
     // return view('videoView', ['token' => $token]);
     //dd($token->paid_link);
-    $embed = OEmbed::get($token->paid_link);
-    if($embed){
-        return $embed->html(['width => 300']);
-    }
+    // dd($token);
+    // $embed = OEmbed::get($token);
+    // dd($embed);
+    // if($embed){
+    //     return $embed->html(['width => 300']);
+    // }
+    
+
+    // Pass the token object to the view
+    // view()->with('token', $token);
+
+    // Get the embed code for the paid link
+    // $embed = OEmbed::get($token->paid_link);
+    // dd($embed);
+    // // Return the embed code
+    // if ($embed) {
+    //     return $embed->html(['width => 300']);
+    // } else {
+    //     echo 'OEmbed was not able to retrieve the embed code for the paid link.';
+    // }
+    // Get the token from the database
+//$token = Token::where('paid_token', $paidToken)->first();
+
+// Pass the token object to the view
+// dd($token->paid_link);
+return view('videoView')->with('token', $token->paid_link);
+
     
     //return view('videoView')->with(['token' => $token->paid_link]);
         //return response()->json(['message' => 'Valid token'], 200);
