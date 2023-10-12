@@ -10,6 +10,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-    
+    <div id="filters">
+<select name="fetchval" id="fetchval"></select>
+
+    </div>
 </body>
 </html>
