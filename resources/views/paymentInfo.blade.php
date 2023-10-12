@@ -10,6 +10,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+    body{
+        margin:0;
+        padding:0;
+        font-family: "Helvitica",sans-serif;
+    }
     <div id="filters">
 <select name="fetchval" id="fetchval"></select>
 <option value="" disabled="" selected="">Select filter</option>
