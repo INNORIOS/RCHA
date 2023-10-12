@@ -12,7 +12,15 @@
 <body>
     <div id="filters">
 <select name="fetchval" id="fetchval"></select>
-
+<option value="" disabled="" selected="">Select filter</option>
+<option value="">first_name</option>
+<option value="">Last_name</option>
+<option value="">Email</option>
+<option value="">Phone number</option>
+<option value="">Place name</option>
+<option value="">place locatoin</option>
+<option value="">Token id</option>
+<option value=""> Amount</option>
     </div>
 </body>
 </html>

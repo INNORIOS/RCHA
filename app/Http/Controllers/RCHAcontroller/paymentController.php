@@ -335,11 +335,12 @@ return view('videoView')->with('token', $token->paid_link);
     }
 }
 public function getPaymentInfo(){
+    $user = JWTAuth::parseToken()->authenticate();
     $payInfoQuery = DB::table('users')
     ->join('payments', 'users.id', '=', 'payments.user_id')
     ->join('places', 'payments.place_id', '=', 'places.id')
     ->join('tokens', 'payments.token_id', '=', 'tokens.id')
-    ->where('users.id', Auth::user()->id)
+    ->where('users.id', $user->id)
     ->select('users.email', 'users.phone_number', 'users.first_name', 'users.last_name', 'places.place_name', 'places.place_location', 'payments.amount','tokens.paid_token');
     $results = $payInfoQuery->get();
     if($results){
