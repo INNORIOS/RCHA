@@ -334,7 +334,7 @@ return view('videoView')->with('token', $token->paid_link);
         ], 500);
     }
 }
-public function getPaymentInfo(){
+public function getPaymentInfo($sortBy, $sortDirection){
     $user = JWTAuth::parseToken()->authenticate();
     $payInfoQuery = DB::table('users')
     ->join('payments', 'users.id', '=', 'payments.user_id')
@@ -342,7 +342,9 @@ public function getPaymentInfo(){
     ->join('tokens', 'payments.token_id', '=', 'tokens.id')
     ->where('users.id', $user->id)
     ->select('users.email', 'users.phone_number', 'users.first_name', 'users.last_name', 'places.place_name', 'places.place_location', 'payments.amount','payments.created_at','tokens.paid_token');
-    $results = $payInfoQuery->get();
+       // Add sorting logic
+    $results = $payInfoQuery->orderBy($sortBy, $sortDirection)->get();
+    // $results = $payInfoQuery->get();
     if($results){
     return $results;
     //return redirect(route('getPaymentInfo'));
