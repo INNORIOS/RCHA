@@ -111,7 +111,10 @@ Route::post('/sendVideoLinkView', function (Request $request) {
     }
 });
 
-
+/**CALLING paymentInfoExportView DOWNLOAD BUTTON */
+Route::get('downloadPaymentInfoExport',function(){
+    return view('paymentInfoExportView');
+});
 
 });
 
