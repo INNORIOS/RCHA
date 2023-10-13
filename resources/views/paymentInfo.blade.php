@@ -109,7 +109,7 @@
                     <th>Created Date</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody> 
                 @foreach($paymentInfo as $info)
                 <tr>
                     <td>{{ $info->first_name }}</td>
@@ -125,5 +125,15 @@
             </tbody>
         </table>
     </div>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $("#fetchval").on('change',function(){
+            var value=$(this).val();
+            alert(value);
+        })
+        var
+    });
+
+    </script>
 </body>
 </html>
