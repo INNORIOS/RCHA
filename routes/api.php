@@ -66,6 +66,8 @@ Route::post('/savePaymentinfo',[paymentController::class,'payment']);
 Route::get('/getPaymentInfo',[paymentController::class,'getPaymentInfo']);
 Route::post('/generatePaidLink',[paymentController::class,'generatePaidLink']);
 Route::get('/processPaidLinks/{id}',[paymentController::class,'processPaidLink']);
+Route::get('/showPaymentInfos', [paymentController::class,'showPaymentInfo']);
+
 
 // Route::get('/getPaidToken/{paid_token}',[paymentController::class,'validatePaidToken']);
 

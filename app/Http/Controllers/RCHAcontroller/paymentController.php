@@ -344,10 +344,23 @@ public function getPaymentInfo(){
     ->select('users.email', 'users.phone_number', 'users.first_name', 'users.last_name', 'places.place_name', 'places.place_location', 'payments.amount','payments.created_at','tokens.paid_token');
     $results = $payInfoQuery->get();
     if($results){
-        foreach ($results as $result) {
-        echo $result->email . ' ' . $result->phone_number . ' ' . $result->first_name . ' ' . $result->last_name . ' ' . $result->place_name . ' ' . $result->place_location . ' ' . $result->amount . ' ' . $result->paid_token.' '.$result->created_at. PHP_EOL ;
+    return $results;
+    //return redirect(route('getPaymentInfo'));
     }
-    }
+    return response()->json([
+        'message' => 'No recods found.',
+    ], 500);
+    // if($results){
+    //     foreach ($results as $result) {
+    //     echo $result->email . ' ' . $result->phone_number . ' ' . $result->first_name . ' ' . $result->last_name . ' ' . $result->place_name . ' ' . $result->place_location . ' ' . $result->amount . ' ' . $result->paid_token.' '.$result->created_at. PHP_EOL ;
+    // }
+    // }
 }
+public function showPaymentInfo() {
+    $user = JWTAuth::parseToken()->authenticate();
+    $paymentInfo = $this->getPaymentInfo(); // Call the function to get data
+    return view('paymentInfo', ['paymentInfo' => $paymentInfo]);
+}
+
 
 }
