@@ -363,8 +363,9 @@ public function showPaymentInfo(Request $request) {
    // $user = JWTAuth::parseToken()->authenticate();
    $sortBy = $request->query('sortBy', 'created_at'); // Default to sorting by created_at
     $sortDirection = $request->query('sortDirection', 'desc'); // Default to descending order
-
-    $paymentInfo = $this->getPaymentInfo(); // Call the function to get data
+    //pass sorted data in payment info
+    $paymentInfo = $this->getPaymentInfo($sortBy, $sortDirection);
+    // $paymentInfo = $this->getPaymentInfo(); // Call the function to get data
     return view('paymentInfo', ['paymentInfo' => $paymentInfo]);
 }
 
