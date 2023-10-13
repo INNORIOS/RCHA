@@ -188,6 +188,7 @@ return [
         'JWTAuth' =>Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTAuthFactory' =>Tymon\JWTAuth\Facades\JWTAuthFactory::class,
         'Rave' => KingFlamez\Rave\Facades\Rave::class,
-    ])->toArray(),
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        ])->toArray(),
 
 ];
