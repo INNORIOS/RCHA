@@ -67,13 +67,6 @@ Route::get('/getPaymentInfo',[paymentController::class,'getPaymentInfo']);
 Route::post('/generatePaidLink',[paymentController::class,'generatePaidLink']);
 Route::get('/processPaidLinks/{id}',[paymentController::class,'processPaidLink']);
 Route::get('/showPaymentInfos', [paymentController::class,'showPaymentInfo']);
-
-
-// Route::get('/getPaidToken/{paid_token}',[paymentController::class,'validatePaidToken']);
-
-// Route::get('videoView',function(){
-//         return view('videoView');
-//     })->name('videoView');
 Route::get('/videoView/{paidToken}', [paymentController::class, 'validatePaidToken']);
 
 
@@ -83,37 +76,9 @@ Route::post('/pay', [flutterController::class, 'initialize'])->name('pay');
 // The callback url after a payment
 Route::get('/rave/callback', [flutterController::class, 'callback'])->name('callback');
 
-/** ROUTE FOR sendVideoLink AFTER PAYMENT */
-// Route::get('/sendVideoLinkView',function(){
-//     $user=Auth::user()->email;
-//     \Illuminate\Support\Facades\Mail::to(Auth::user()->email)
-//     ->send(new \App\Mail\sendVideoLink(Auth::user()));
-   
-//     return null;
-    
-//     });
-// Route::post('/sendVideoLinkView', function (Request $request) {
-//     try{
-//     $user = Auth::user();
-//     $place_id = $request->input('place_id');
-
-//     // Call the generatePaidLink method with a request object
-//     $paidLinkResponse = app('App\Http\Controllers\RCHAcontroller\paymentController')->generatePaidLink($request);
-
-//     // Get the JSON data from the response
-//     $data = $paidLinkResponse->getData();
-// //dd($data->paidToken);
-//     if (isset($data->paidToken)) {
-//         \Illuminate\Support\Facades\Mail::to($user->email)
-//             ->send(new \App\Mail\sendVideoLink($user, $data->paidToken));
-
-//         return 'Email sent successfully!';
-//     }
-
-//     return 'Error generating paid link';
-// }catch(\Exception $e){
-//     Log::error('Exception occurred: ' . $e->getMessage());}
-// });
+/**ROUTE FOR EXPORTING FILE IN EXCEL */
+Route::get('/export-payments', 'YourController@export');
+/**ROUTE TO SEND PAID TOKEN EMAIL TO PAID USER */
 Route::post('/sendVideoLinkView', function (Request $request) {
     try {
         $user = Auth::user();
