@@ -343,8 +343,8 @@ public function getPaymentInfo($sortBy, $sortDirection){
     ->where('users.id', $user->id)
     ->select('users.email', 'users.phone_number', 'users.first_name', 'users.last_name', 'places.place_name', 'places.place_location', 'payments.amount','payments.created_at','tokens.paid_token');
        // Add sorting logic
-    $results = $payInfoQuery->orderBy($sortBy, $sortDirection)->get();
-    // $results = $payInfoQuery->get();
+    $payInfoQuery->orderBy($sortBy, $sortDirection)->get();
+    $results = $payInfoQuery->get();
     if($results){
     return $results;
     //return redirect(route('getPaymentInfo'));
@@ -360,7 +360,7 @@ public function getPaymentInfo($sortBy, $sortDirection){
     // }
 }
 public function showPaymentInfo(Request $request) {
-   // $user = JWTAuth::parseToken()->authenticate();
+    $user = JWTAuth::parseToken()->authenticate();
    $sortBy = $request->query('sortBy', 'created_at'); // Default to sorting by created_at
     $sortDirection = $request->query('sortDirection', 'desc'); // Default to descending order
     //pass sorted data in payment info
