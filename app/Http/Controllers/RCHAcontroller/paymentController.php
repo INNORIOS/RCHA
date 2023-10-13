@@ -348,6 +348,7 @@ public function getPaymentInfo($sortBy, $sortDirection){
     if($results){
     return $results;
     //return redirect(route('getPaymentInfo'));
+    
     }
     return response()->json([
         'message' => 'No recods found.',
@@ -358,8 +359,11 @@ public function getPaymentInfo($sortBy, $sortDirection){
     // }
     // }
 }
-public function showPaymentInfo() {
+public function showPaymentInfo(Request $request) {
    // $user = JWTAuth::parseToken()->authenticate();
+   $sortBy = $request->query('sortBy', 'created_at'); // Default to sorting by created_at
+    $sortDirection = $request->query('sortDirection', 'desc'); // Default to descending order
+
     $paymentInfo = $this->getPaymentInfo(); // Call the function to get data
     return view('paymentInfo', ['paymentInfo' => $paymentInfo]);
 }
