@@ -3,6 +3,7 @@
 
 //use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -15,8 +16,8 @@ use App\Http\Controllers\RCHAcontroller\imagesController;
 use App\Http\Controllers\paymentGatways\flutterController;
 use App\Http\Controllers\RCHAcontroller\paymentController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
+use App\Http\Controllers\RCHAcontroller\paymentInfoExportController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
-use Illuminate\Support\Facades\Log;
 
 Auth::routes([
     'verify'=>true
@@ -76,8 +77,11 @@ Route::post('/pay', [flutterController::class, 'initialize'])->name('pay');
 // The callback url after a payment
 Route::get('/rave/callback', [flutterController::class, 'callback'])->name('callback');
 
+
 /**ROUTE FOR EXPORTING FILE IN EXCEL */
-Route::get('/export-payments', 'YourController@export');
+Route::get('/export-paymentInfoExcel',[paymentInfoExportController::class],'export');
+
+
 /**ROUTE TO SEND PAID TOKEN EMAIL TO PAID USER */
 Route::post('/sendVideoLinkView', function (Request $request) {
     try {
