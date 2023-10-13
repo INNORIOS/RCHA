@@ -334,31 +334,24 @@ return view('videoView')->with('token', $token->paid_link);
         ], 500);
     }
 }
-public function getPaymentInfo($sortBy, $sortDirection){
+
+public function getPaymentInfo($sortBy, $sortDirection) {
     $user = JWTAuth::parseToken()->authenticate();
     $payInfoQuery = DB::table('users')
-    ->join('payments', 'users.id', '=', 'payments.user_id')
-    ->join('places', 'payments.place_id', '=', 'places.id')
-    ->join('tokens', 'payments.token_id', '=', 'tokens.id')
-    ->where('users.id', $user->id)
-    ->select('users.email', 'users.phone_number', 'users.first_name', 'users.last_name', 'places.place_name', 'places.place_location', 'payments.amount','payments.created_at','tokens.paid_token');
-       // Add sorting logic
-    $payInfoQuery->orderBy($sortBy, $sortDirection)->get();
+        ->join('payments', 'users.id', '=', 'payments.user_id')
+        ->join('places', 'payments.place_id', '=', 'places.id')
+        ->join('tokens', 'payments.token_id', '=', 'tokens.id')
+        ->where('users.id', $user->id)
+        ->select('users.email', 'users.phone_number', 'users.first_name', 'users.last_name', 'places.place_name', 'places.place_location', 'payments.amount', 'payments.created_at', 'tokens.paid_token');
+
+    // Add sorting logic
+    $payInfoQuery->orderBy($sortBy, $sortDirection);
+
     $results = $payInfoQuery->get();
-    if($results){
+
     return $results;
-    //return redirect(route('getPaymentInfo'));
-    
-    }
-    return response()->json([
-        'message' => 'No recods found.',
-    ], 500);
-    // if($results){
-    //     foreach ($results as $result) {
-    //     echo $result->email . ' ' . $result->phone_number . ' ' . $result->first_name . ' ' . $result->last_name . ' ' . $result->place_name . ' ' . $result->place_location . ' ' . $result->amount . ' ' . $result->paid_token.' '.$result->created_at. PHP_EOL ;
-    // }
-    // }
 }
+
 public function showPaymentInfo(Request $request) {
     $user = JWTAuth::parseToken()->authenticate();
    $sortBy = $request->query('sortBy', 'created_at'); // Default to sorting by created_at
@@ -370,4 +363,4 @@ public function showPaymentInfo(Request $request) {
 }
 
 
-}
+ }
