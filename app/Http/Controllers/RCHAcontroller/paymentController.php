@@ -357,7 +357,7 @@ public function getPaymentInfo(){
     // }
 }
 public function showPaymentInfo() {
-    $user = JWTAuth::parseToken()->authenticate();
+   // $user = JWTAuth::parseToken()->authenticate();
     $paymentInfo = $this->getPaymentInfo(); // Call the function to get data
     return view('paymentInfo', ['paymentInfo' => $paymentInfo]);
 }

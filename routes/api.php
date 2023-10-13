@@ -146,4 +146,3 @@ Route::post('/sendVideoLinkView', function (Request $request) {
 
 });
 
-    
