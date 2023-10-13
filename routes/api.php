@@ -79,7 +79,7 @@ Route::get('/rave/callback', [flutterController::class, 'callback'])->name('call
 
 
 /**ROUTE FOR EXPORTING FILE IN EXCEL */
-Route::get('/export-paymentInfoExcel',[paymentInfoExportController::class],'export');
+Route::get('/exportPaymentInfoExcel',[paymentInfoExportController::class,'export']);
 
 
 /**ROUTE TO SEND PAID TOKEN EMAIL TO PAID USER */
