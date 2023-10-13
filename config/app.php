@@ -170,7 +170,9 @@ return [
         App\Providers\RouteServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         KingFlamez\Rave\RaveServiceProvider::class,
-    ])->toArray(),
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+
+        ])->toArray(),
 
     /*
     |--------------------------------------------------------------------------
