@@ -14,4 +14,17 @@ class PaymentInfoExport implements FromCollection
     {
         return Payment::all();
     }
+    // public function headings(): array
+    // {
+    //     return [
+    //         'First Name',
+    //         'Last Name',
+    //         'Email',
+    //         'Phone Number',
+    //         'Place Location',
+    //         'Token ID',
+    //         'Amount',
+    //         'Created Date',
+    //     ];
+    // }
 }
