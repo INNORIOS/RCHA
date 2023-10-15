@@ -47,6 +47,9 @@ Route::group(['middleware'=>'api','prefix'=>'auth'],function($router){
                 
                 Route::get('/send-email', [MailController::class,'sendEmail']);
 
+
+                Route::group(['middleware' => 'admin'], function () {
+               
 /*  ROUTE FOR IMAGE CONTROLLER API*/
 // Route::post('/upload-image',[imagesController::class,'createImage']);
 Route::post('multiple-image-upload', [imagesController::class, 'createImage']);
@@ -66,10 +69,11 @@ Route::delete('/deletePlace/{id}', [placeController::class, 'deletePlace']);
 Route::post('/savePaymentinfo',[paymentController::class,'payment']);
 Route::get('/getPaymentInfo',[paymentController::class,'getPaymentInfo']);
 Route::post('/generatePaidLink',[paymentController::class,'generatePaidLink']);
+
 Route::get('/processPaidLinks/{id}',[paymentController::class,'processPaidLink']);
 Route::get('/showPaymentInfos', [paymentController::class,'showPaymentInfo']);
 Route::get('/videoView/{paidToken}', [paymentController::class, 'validatePaidToken']);
-
+});
 
 /** ROUTE FOR FLUTTERWAVE PAYMENT CONTROLLER */
 // The route that the button calls to initialize payment
@@ -116,6 +120,8 @@ Route::get('downloadPaymentInfoExport',function(){
     return view('paymentInfoExportView');
 });
 Route::get('/export-payment-info', [paymentInfoExportController::class, 'exportPaymentInfo']);
+/** ROUTE ONLY FOR ADMIN  */
+
 
 
 });
