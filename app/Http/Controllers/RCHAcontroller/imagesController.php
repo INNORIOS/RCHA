@@ -56,7 +56,7 @@ public function updateImage(Request $request,$id)
         'place_id' => 'required|exists:places,id', // Corrected the validation rule
         'image_path' => 'required|string',
     ]);
-dd($request);
+//dd($request);
     $image = Image::findOrFail($id);
     // dd($image);
     

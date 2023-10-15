@@ -115,6 +115,8 @@ Route::post('/sendVideoLinkView', function (Request $request) {
 Route::get('downloadPaymentInfoExport',function(){
     return view('paymentInfoExportView');
 });
+Route::get('/export-payment-info', [paymentInfoExportController::class, 'exportPaymentInfo']);
+
 
 });
 
