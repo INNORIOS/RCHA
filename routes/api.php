@@ -46,9 +46,13 @@ Route::group(['middleware'=>'api','prefix'=>'auth'],function($router){
                 ->name('verification.send');
                 
                 Route::get('/send-email', [MailController::class,'sendEmail']);
+ //==============================================================================               
 
+/** ROUTE ONLY FOR ADMIN  */
 
-                Route::group(['middleware' => 'admin'], function () {
+//================================================================================
+
+ Route::group(['middleware' => 'admin'], function () {
                
 /*  ROUTE FOR IMAGE CONTROLLER API*/
 // Route::post('/upload-image',[imagesController::class,'createImage']);
@@ -64,16 +68,23 @@ Route::get('/places', [placeController::class, 'getPlaces']);
 Route::get('/place/{id}', [placeController::class, 'getPlaceById']);
 Route::put('/updatePlace/{id}', [placeController::class, 'updatePlace']);
 Route::delete('/deletePlace/{id}', [placeController::class, 'deletePlace']);
-
+// });
 /** ROUTE FOR PAYMENT INFO CONTROLLER */
 Route::post('/savePaymentinfo',[paymentController::class,'payment']);
-Route::get('/getPaymentInfo',[paymentController::class,'getPaymentInfo']);
+Route::get('/getPaymentInfoAdmin',[paymentController::class,'getPaymentInfoAdmin']);
 Route::post('/generatePaidLink',[paymentController::class,'generatePaidLink']);
 
 Route::get('/processPaidLinks/{id}',[paymentController::class,'processPaidLink']);
-Route::get('/showPaymentInfos', [paymentController::class,'showPaymentInfo']);
+Route::get('/showPaymentInfoAdmin', [paymentController::class,'showPaymentInfoAdmin']);
 Route::get('/videoView/{paidToken}', [paymentController::class, 'validatePaidToken']);
 });
+
+//=====================================  ADIMIN ZONE  ENDs ================================================================
+
+/** ROUTE TO DISPLAY USER HISTORICAL */
+Route::get('/getPaymentInfo',[paymentController::class,'getPaymentInfo']);
+Route::get('/showPaymentInfos', [paymentController::class,'showPaymentInfo']);
+
 
 /** ROUTE FOR FLUTTERWAVE PAYMENT CONTROLLER */
 // The route that the button calls to initialize payment
@@ -120,7 +131,7 @@ Route::get('downloadPaymentInfoExport',function(){
     return view('paymentInfoExportView');
 });
 Route::get('/export-payment-info', [paymentInfoExportController::class, 'exportPaymentInfo']);
-/** ROUTE ONLY FOR ADMIN  */
+
 
 
 
