@@ -34,7 +34,8 @@ public function generatePaidLink(Request $request)
 
         $paidToken = Str::random(32);
         // Set the token expiration time to 1 minutes from now
-        $tokenExpiresAt = Carbon::now()->addMinutes(20);
+        // $tokenExpiresAt = Carbon::now()->addMinutes(20);
+        $tokenExpiresAt = Carbon::now()->addHours(24);
 
         $token = new Token();
         $token->paid_token = $paidToken;

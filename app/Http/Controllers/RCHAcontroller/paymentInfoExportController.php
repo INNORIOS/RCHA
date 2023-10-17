@@ -24,8 +24,8 @@ class paymentInfoExportController extends Controller
 // //         // Calculate checksum
 // //         $checksum = md5_file(storage_path('app/' . $filePath));
 
-// //         // Return the download response
-// //         return response()->download(storage_path('app/' . $filePath))->deleteFileAfterSend(true);
+//         // Return the download response
+//         return response()->download(storage_path('app/' . $filePath))->deleteFileAfterSend(true);
  
         
 //     }  
