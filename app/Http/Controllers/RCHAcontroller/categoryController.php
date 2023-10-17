@@ -17,13 +17,21 @@ class categoryController extends Controller
     ]);
     try{
     $category=Category::create($request->all());
-    if ($category)
     return response()->json($category,201);
     }catch(\Exception $e){
         Log::error($e->getMessage());
         return response()->json(['message' => 'An error occurred while creating the category.'], 500);
     }
-
+}
+public function listCategories()
+{
+    try {
+        $categories = Category::all();
+        return response()->json($categories);
+    } catch (\Exception $e) {
+        Log::error($e->getMessage());
+        return response()->json(['message' => 'An error occurred while fetching categories.'], 500);
+    }
 }
 
 }
