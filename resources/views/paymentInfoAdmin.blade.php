@@ -113,7 +113,7 @@
                 </tr>
             </thead>
             <tbody> 
-                @foreach($paymentInfoAdmin as $info)
+                @foreach($paymentInfo as $info)
                 <tr>
                     <td>{{ $info->first_name }}</td>
                     <td>{{ $info->last_name }}</td>
@@ -128,7 +128,13 @@
             </tbody>
         </table>
     </div>
-    <script type="text/javascript">
+    <div>
+        {{-- <h1>Download Test</h1>
+            <form action="http://127.0.0.1:8000/api/auth/export-payment-info" method="GET">
+            <button type="submit">Download Excel File</button>
+        </form>
+    </div> --}}
+    {{-- <script type="text/javascript">
     $(document).ready(function(){
         $("#fetchval").on('change',function(){
             var value=$(this).val();
@@ -137,6 +143,6 @@
         var
     });
 
-    </script>
+    </script> --}}
 </body>
 </html>

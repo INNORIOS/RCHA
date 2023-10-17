@@ -71,11 +71,11 @@ Route::delete('/deletePlace/{id}', [placeController::class, 'deletePlace']);
 // });
 /** ROUTE FOR PAYMENT INFO CONTROLLER */
 Route::post('/savePaymentinfo',[paymentController::class,'payment']);
-Route::get('/getPaymentInfoAdmin',[paymentController::class,'getPaymentInfoAdmin']);
+
 Route::post('/generatePaidLink',[paymentController::class,'generatePaidLink']);
 
 Route::get('/processPaidLinks/{id}',[paymentController::class,'processPaidLink']);
-Route::get('/showPaymentInfoAdmin', [paymentController::class,'showPaymentInfoAdmin']);
+
 Route::get('/videoView/{paidToken}', [paymentController::class, 'validatePaidToken']);
 });
 
@@ -85,6 +85,8 @@ Route::get('/videoView/{paidToken}', [paymentController::class, 'validatePaidTok
 Route::get('/getPaymentInfo',[paymentController::class,'getPaymentInfo']);
 Route::get('/showPaymentInfos', [paymentController::class,'showPaymentInfo']);
 
+// Route::get('/getPaymentInfo',[paymentController::class,'getPaymentInfoAdmin']);
+// Route::get('/showPaymentInfo', [paymentController::class,'showPaymentInfoAdmin']);
 
 /** ROUTE FOR FLUTTERWAVE PAYMENT CONTROLLER */
 // The route that the button calls to initialize payment
@@ -94,7 +96,7 @@ Route::get('/rave/callback', [flutterController::class, 'callback'])->name('call
 
 
 /**ROUTE FOR EXPORTING FILE IN EXCEL */
-Route::get('/exportPaymentInfoExcel',[paymentInfoExportController::class,'export']);
+// Route::get('/exportPaymentInfoExcel',[paymentInfoExportController::class,'export']);
 
 
 /**ROUTE TO SEND PAID TOKEN EMAIL TO PAID USER */
@@ -131,6 +133,7 @@ Route::get('downloadPaymentInfoExport',function(){
     return view('paymentInfoExportView');
 });
 Route::get('/export-payment-info', [paymentInfoExportController::class, 'exportPaymentInfo']);
+// Route::get('/export-payment-info', [paymentController::class, 'exportPaymentInfo']);
 
 
 

@@ -124,43 +124,51 @@ return view('videoView')->with('token', $token->paid_link);
 //============================================================================
 /** USER HISTORICAL */
 //============================================================================
-public function getPaymentInfo($sortBy, $sortDirection) {
-    $user = JWTAuth::parseToken()->authenticate();
-    $payInfoQuery = DB::table('users')
-        ->join('payments', 'users.id', '=', 'payments.user_id')
-        ->join('places', 'payments.place_id', '=', 'places.id')
-        ->join('tokens', 'payments.token_id', '=', 'tokens.id')
-        ->where('users.id', $user->id)
-        ->select('users.email', 'users.phone_number', 'users.first_name', 'users.last_name', 'places.place_name', 'places.place_location', 'payments.amount', 'payments.created_at', 'tokens.paid_token');
+// public function getPaymentInfo($sortBy, $sortDirection) {
+//     $user = JWTAuth::parseToken()->authenticate();
+//     $payInfoQuery = DB::table('users')
+//         ->join('payments', 'users.id', '=', 'payments.user_id')
+//         ->join('places', 'payments.place_id', '=', 'places.id')
+//         ->join('tokens', 'payments.token_id', '=', 'tokens.id')
+//         ->where('users.id', $user->id)
+//         ->select('users.email', 'users.phone_number', 'users.first_name', 'users.last_name', 'places.place_name', 'places.place_location', 'payments.amount', 'payments.created_at', 'tokens.paid_token');
 
-    // Add sorting logic
-    $payInfoQuery->orderBy($sortBy, $sortDirection);
+//     // Add sorting logic
+//     $payInfoQuery->orderBy($sortBy, $sortDirection);
 
-    $results = $payInfoQuery->get();
+//     $results = $payInfoQuery->get();
 
-    return $results;
-}
+//     return $results;
+// }
 
-public function showPaymentInfo(Request $request) {
-    $user = JWTAuth::parseToken()->authenticate();
-   $sortBy = $request->query('sortBy', 'created_at'); // Default to sorting by created_at
-    $sortDirection = $request->query('sortDirection', 'desc'); // Default to descending order
-    //pass sorted data in payment info
-    $paymentInfo = $this->getPaymentInfo($sortBy, $sortDirection);
-    // $paymentInfo = $this->getPaymentInfo(); // Call the function to get data
-    return view('paymentInfo', ['paymentInfo' => $paymentInfo]);
-}
+// public function showPaymentInfo(Request $request) {
+//     $user = JWTAuth::parseToken()->authenticate();
+//    $sortBy = $request->query('sortBy', 'created_at'); // Default to sorting by created_at
+//     $sortDirection = $request->query('sortDirection', 'desc'); // Default to descending order
+//     //pass sorted data in payment info
+//     $paymentInfo = $this->getPaymentInfo($sortBy, $sortDirection);
+//     // $paymentInfo = $this->getPaymentInfo(); // Call the function to get data
+//     return view('paymentInfo', ['paymentInfo' => $paymentInfo]);
+// }
 
 //========================================================================
-public function getPaymentInfoAdmin($sortBy, $sortDirection) {
+public function getPaymentInfo($sortBy, $sortDirection) {
     $user = JWTAuth::parseToken()->authenticate();
-
+// dd($user);
     // Check if the authenticated user has an admin role
     if ($user->role === 'admin') {
         $payInfoQuery = DB::table('users')
             ->join('payments', 'users.id', '=', 'payments.user_id')
             ->join('places', 'payments.place_id', '=', 'places.id')
             ->join('tokens', 'payments.token_id', '=', 'tokens.id');
+
+    }else {
+        $payInfoQuery = DB::table('users')
+        ->join('payments', 'users.id', '=', 'payments.user_id')
+        ->join('places', 'payments.place_id', '=', 'places.id')
+        ->join('tokens', 'payments.token_id', '=', 'tokens.id')
+        ->where('users.id', $user->id);
+    }        
 
     // Add sorting logic
     $payInfoQuery->orderBy($sortBy, $sortDirection);
@@ -177,16 +185,19 @@ public function getPaymentInfoAdmin($sortBy, $sortDirection) {
         'payments.created_at',
         'tokens.paid_token'
     )->get();
-    }
+    // }
     return $results;
 }
-public function showPaymentInfoAdmin(Request $request) {
-    $sortBy = $request->query('sortBy', 'created_at'); // Default to sorting by created_at
+public function showPaymentInfo(Request $request) {
+    $user = JWTAuth::parseToken()->authenticate();
+    // $sortBy = $request->query('sortBy', 'created_at'); // Default to sorting by created_at
+    $sortBy = $request->query('sortBy', 'first_name');
     $sortDirection = $request->query('sortDirection', 'desc'); // Default to descending order
 
     // Pass sorted data in payment info
-    $paymentInfo = $this->getPaymentInfoAdmin($sortBy, $sortDirection);
+    $paymentInfo = $this->getPaymentInfo($sortBy, $sortDirection);
 
-    return view('paymentInfoAdmin', ['paymentInfoAdmin' => $paymentInfo]);
+    // return view('paymentInfo', ['paymentInfo' => $paymentInfo]);
+    return $paymentInfo;
 }
  }

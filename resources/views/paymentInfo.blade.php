@@ -107,7 +107,7 @@
                     <th>Email</th>
                     <th>Phone Number</th>
                     <th>Place Location</th>
-                    <th>Token ID</th>
+                    {{-- <th>Token ID</th> --}}
                     <th>Amount</th>
                     <th>Created Date</th>
                 </tr>
@@ -120,7 +120,7 @@
                     <td>{{ $info->email }}</td>
                     <td>{{ $info->phone_number }}</td>
                     <td>{{ $info->place_location }}</td>
-                    <td>{{ $info->paid_token }}</td>
+                    {{-- <td>{{ $info->paid_token }}</td> --}}
                     <td>{{ $info->amount }}</td>
                     <td>{{ $info->created_at }}</td>
                 </tr>
@@ -128,7 +128,15 @@
             </tbody>
         </table>
     </div>
-    <script type="text/javascript">
+    <div>
+        <h1>Download Test</h1>
+    
+        {{-- <form action="http://127.0.0.1:8000/api/auth/exportPaymentInfoExcel" method="GET"> --}}
+            <form action="http://127.0.0.1:8000/api/auth/export-payment-info" method="GET">
+            <button type="submit">Download Excel File</button>
+        </form>
+    </div>
+    {{-- <script type="text/javascript">
     $(document).ready(function(){
         $("#fetchval").on('change',function(){
             var value=$(this).val();
@@ -137,6 +145,6 @@
         var
     });
 
-    </script>
+    </script> --}}
 </body>
 </html>

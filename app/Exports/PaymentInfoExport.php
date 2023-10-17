@@ -14,38 +14,14 @@ class PaymentInfoExport implements FromCollection
     /**
     * @return \Illuminate\Support\Collection
     */
-    // public function collection()
-    // {
-    //     $paymentInfo=Payment::all();
-    //     //ddd($paymentInfo);
-    //     return $paymentInfo;
-    // }
-    // public function headings(): array
-    // {
-    //     return [
-    //         'id',
-    //         'user_id',
-    //         'place_id',
-    //         'token_id',
-    //         'amount',
-    //         'created_at',
-    //         'updated_at',
-           
-    //     ];
-    // }
+    protected $paymentInfo;
+    public function __construct($paymentInfo)
+    {
+        $this->paymentInfo = $paymentInfo;
+    }
     public function collection()
     {
-        // $paymentInfo = $this->getPaymentInfo();
-       // getPaymentInfo is a method that retrieves payment information 
-           $sortBy = 'created_at'; 
-           $sortDirection = 'desc';
-           $request = request()->merge(['sortBy' => $sortBy, 'sortDirection' => $sortDirection]);
-   
-           // Call the controller method which holds my showPaymentInfo function
-           $controller = new paymentController(); 
-           $paymentInfo = $controller->showPaymentInfo($request);
-
-        return $paymentInfo;
+    return collect($this->paymentInfo);
     }
 public function headings(): array
 {
