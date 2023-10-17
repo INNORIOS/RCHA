@@ -33,5 +33,14 @@ public function listCategories()
         return response()->json(['message' => 'An error occurred while fetching categories.'], 500);
     }
 }
-
+public function getCategoryById($id)
+{
+    try {
+        $category = Category::findOrFail($id);
+        return response()->json($category);
+    } catch (\Exception $e) {
+        Log::error($e->getMessage());
+        return response()->json(['message' => 'Category not found.'], 404);
+    }
+}
 }
