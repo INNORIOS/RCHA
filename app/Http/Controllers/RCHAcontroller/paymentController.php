@@ -161,7 +161,7 @@ public function getPaymentInfo($sortBy, $sortDirection) {
             ->join('payments', 'users.id', '=', 'payments.user_id')
             ->join('places', 'payments.place_id', '=', 'places.id')
             ->join('tokens', 'payments.token_id', '=', 'tokens.id');
-
+            
     }else {
         $payInfoQuery = DB::table('users')
         ->join('payments', 'users.id', '=', 'payments.user_id')
@@ -199,5 +199,11 @@ public function showPaymentInfo(Request $request) {
 
     // return view('paymentInfo', ['paymentInfo' => $paymentInfo]);
     return $paymentInfo;
+}
+public function calculateTotalAmountPaid()
+{
+    $totalAmountPaid = Payment::sum('amount');
+
+    return $totalAmountPaid;
 }
  }
