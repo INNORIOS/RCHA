@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\categoryController;
 use App\Http\Controllers\userAuthController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Auth\VerificationController;
@@ -79,6 +80,16 @@ Route::get('/processPaidLinks/{id}',[paymentController::class,'processPaidLink']
 Route::get('/videoView/{paidToken}', [paymentController::class, 'validatePaidToken']);
 
 Route::get('/calculateTotalAmountPaid',[paymentController::class,'calculateTotalAmountPaid']);
+/** ROUTE FOR CATEGORY */
+Route::prefix('categories')->group(function () {
+    Route::get('/', [categoryController::class, 'listcategories']);
+    Route::get('/{id}', [CategoryController::class, 'getCategoryById']);
+    Route::post('/', [CategoryController::class, 'store']);
+    Route::put('/{id}', [CategoryController::class, 'update']);
+    Route::delete('/{id}', [CategoryController::class, 'delete']);
+
+});
+
 });
 
 //=====================================  ADIMIN ZONE  ENDs ================================================================
