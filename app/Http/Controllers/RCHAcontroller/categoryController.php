@@ -43,4 +43,15 @@ public function getCategoryById($id)
         return response()->json(['message' => 'Category not found.'], 404);
     }
 }
+public function update(Request $request, $id)
+{
+    try {
+        $category = Category::findOrFail($id);
+        $category->update($request->all());
+        return response()->json($category, 200);
+    } catch (\Exception $e) {
+        Log::error($e->getMessage());
+        return response()->json(['message' => 'An error occurred while updating the category.'], 500);
+    }
+}
 }
