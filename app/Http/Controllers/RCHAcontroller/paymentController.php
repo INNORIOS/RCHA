@@ -205,5 +205,6 @@ public function calculateTotalAmountPaid()
     $totalAmountPaid = Payment::sum('amount');
 
     return $totalAmountPaid;
+    
 }
  }

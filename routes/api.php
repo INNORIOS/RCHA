@@ -77,6 +77,8 @@ Route::post('/generatePaidLink',[paymentController::class,'generatePaidLink']);
 Route::get('/processPaidLinks/{id}',[paymentController::class,'processPaidLink']);
 
 Route::get('/videoView/{paidToken}', [paymentController::class, 'validatePaidToken']);
+
+Route::get('/calculateTotalAmountPaid',[paymentController::class,'calculateTotalAmountPaid']);
 });
 
 //=====================================  ADIMIN ZONE  ENDs ================================================================
@@ -84,9 +86,6 @@ Route::get('/videoView/{paidToken}', [paymentController::class, 'validatePaidTok
 /** ROUTE TO DISPLAY USER HISTORICAL */
 Route::get('/getPaymentInfo',[paymentController::class,'getPaymentInfo']);
 Route::get('/showPaymentInfos', [paymentController::class,'showPaymentInfo']);
-
-// Route::get('/getPaymentInfo',[paymentController::class,'getPaymentInfoAdmin']);
-// Route::get('/showPaymentInfo', [paymentController::class,'showPaymentInfoAdmin']);
 
 /** ROUTE FOR FLUTTERWAVE PAYMENT CONTROLLER */
 // The route that the button calls to initialize payment
