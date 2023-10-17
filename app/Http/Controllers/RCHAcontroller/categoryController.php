@@ -54,4 +54,15 @@ public function update(Request $request, $id)
         return response()->json(['message' => 'An error occurred while updating the category.'], 500);
     }
 }
+public function delete($id)
+{
+    try {
+        $category = Category::findOrFail($id);
+        $category->delete();
+        return response()->json(null, 204);
+    } catch (\Exception $e) {
+        Log::error($e->getMessage());
+        return response()->json(['message' => 'An error occurred while deleting the category.'], 500);
+    }
+}    
 }
