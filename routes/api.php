@@ -2,14 +2,15 @@
 
 
 //use Illuminate\Support\Facades\Auth;
+use App\Mail\sendFreeToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+// use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MailController;
-// use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\RCHAcontroller\CategoryController;
 use App\Http\Controllers\userAuthController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Auth\VerificationController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\RCHAcontroller\placeController;
 use App\Http\Controllers\RCHAcontroller\imagesController;
 use App\Http\Controllers\paymentGatways\flutterController;
 use App\Http\Controllers\RCHAcontroller\paymentController;
+use App\Http\Controllers\RCHAcontroller\CategoryController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\RCHAcontroller\paymentInfoExportController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
@@ -107,7 +109,7 @@ Route::get('/rave/callback', [flutterController::class, 'callback'])->name('call
 
 
 /**ROUTE FOR EXPORTING FILE IN EXCEL */
-// Route::get('/exportPaymentInfoExcel',[paymentInfoExportController::class,'export']);
+Route::get('/export-payment-info', [paymentInfoExportController::class, 'exportPaymentInfo']);
 
 
 /**ROUTE TO SEND PAID TOKEN EMAIL TO PAID USER */
@@ -123,7 +125,7 @@ Route::post('/sendVideoLinkView', function (Request $request) {
         $data = $paidLinkResponse->getData();
 
         if (isset($data->paidToken)) {
-            \Illuminate\Support\Facades\Mail::to($user->email)
+                    Mail::to($user->email)
                 ->send(new \App\Mail\sendVideoLink($user, $data->paidToken));
 
             return 'Email sent successfully!';
@@ -139,13 +141,21 @@ Route::post('/sendVideoLinkView', function (Request $request) {
     }
 });
 
-/**CALLING paymentInfoExportView DOWNLOAD BUTTON */
-Route::get('downloadPaymentInfoExport',function(){
-    return view('paymentInfoExportView');
+/** SENDING FREE TOKEN TO CUSTOM EMAIL */
+Route::post('/sendFreeToken', function (Request $request) {
+    $paidToken = $request->input('paidToken');
+    $recipientEmail = $request->input('email'); 
+    
+    Mail::to($recipientEmail)
+        ->send(new sendFreeToken($paidToken));
+    
+    return 'Email sent successfully!';
 });
-Route::get('/export-payment-info', [paymentInfoExportController::class, 'exportPaymentInfo']);
-// Route::get('/export-payment-info', [paymentController::class, 'exportPaymentInfo']);
 
+/**CALLING paymentInfoExportView DOWNLOAD BUTTON */
+// Route::get('downloadPaymentInfoExport',function(){
+//     return view('paymentInfoExportView');
+// });
 
 
 
