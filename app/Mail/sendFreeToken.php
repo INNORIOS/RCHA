@@ -20,8 +20,8 @@ class sendFreeToken extends Mailable
     public function build()
     {
         return $this
-            ->subject('Your Free Token')
-            ->markdown('emails.sendFreeToken', [
+            ->subject('Welcome to RCHA site')
+            ->markdown('sendVideoLink.sendFreeToken', [
                 'paidToken' => $this->paidToken,
             ]);
     }
