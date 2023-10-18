@@ -136,7 +136,7 @@ Route::post('/sendVideoLinkView', function (Request $request) {
     } catch(\Exception $e) {
         Log::error('Exception occurred: ' . $e->getMessage());
         return response()->json([
-            'message' => 'An error occurred while sending the token.',
+            'message' => 'An error occurred while sending the paid token.',
         ], 500);
     }
 });
@@ -145,11 +145,15 @@ Route::post('/sendVideoLinkView', function (Request $request) {
 Route::post('/sendFreeToken', function (Request $request) {
     $paidToken = $request->input('paidToken');
     $recipientEmail = $request->input('email'); 
-    
+    try {
     Mail::to($recipientEmail)
         ->send(new sendFreeToken($paidToken));
-    
     return 'Email sent successfully!';
+    } catch(\Exception $e) {
+        Log::error('Exception occurred: ' . $e->getMessage());
+        return response()->json(['message'=>'An error occurred while sending the free token.'],500);
+    }
+
 });
 
 /**CALLING paymentInfoExportView DOWNLOAD BUTTON */
