@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('place_preview_video');
             
             $table->string('place_link');
-            $table->foreign('category_id')->references('category_id')->on('category')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });
     }

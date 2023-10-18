@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+// namespace App\Http\Controllers;
+namespace App\Http\Controllers\RCHAcontroller;
 
+use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class categoryController extends Controller
+class CategoryController extends Controller
 {
     public function store(Request $request)
 {
