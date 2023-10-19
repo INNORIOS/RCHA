@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\RCHAcontroller;
 
+use App\Models\Place;
 use App\Models\Payment;
 use App\Models\Feedback;
 use Illuminate\Http\Request;
@@ -46,13 +47,22 @@ public function feedback(Request $request)
         ], 500);
     }
 }
-public function getFeedback(Request $request)
+public function getFeedback($place_id)
 {
     try {
         // Get the place ID from the request.
-        $placeId = $request->input('place_id');
-        $payment= Payment::where('place_id',$placeId);
+        //  $placeId = $request->input('place_id');
+        $placeId = Place::find($place_id);
+        if (!$placeId) {
+            return response()->json(['message' => 'Place Id not found.'], 404);
+        }
+        //dd($placeId);
+        $payment= Payment::where('place_id',$placeId->id)->first();
+        if (!$payment) {
+            return response()->json(['message' => 'No one has Paid for this place.'], 404);
+        }
         $payment_id=$payment->id;
+        //dd($payment_id);
         // Retrieve feedback records for the given place ID.
         $feedback = Feedback::where('payment_id', $payment_id)->get();
 
@@ -64,9 +74,20 @@ public function getFeedback(Request $request)
 
         // Return an error response.
         return response()->json([
-            'message' => 'An error occurred while fetching feedback.',
+            'message' => 'An error occurred while fetching feedback for specified user.',
         ], 500);
     }
+}
+public function getAllFeedback(){
+
+   try{
+        return Feedback::all();
+    }catch(\Exception $e){
+        Log::error($e->getMessage());
+        return response(['message'=> 'An error occurred while fetching AllFeedback.'],500)
+
+    }
+    
 }
 
 

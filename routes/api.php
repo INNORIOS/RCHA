@@ -118,7 +118,7 @@ Route::get('/videoView/{paidToken}', [paymentController::class, 'validatePaidTok
 
 /** GETTING FEEDBACK FROM USER */
 Route::post('/feedback',[feedbackController::class,'feedback']);
-Route::get('/getFeedback',[feedbackController::class,'getFeedback']);
+Route::get('/getFeedback/{place_id}',[feedbackController::class,'getFeedback']);
 
 /**ROUTE TO SEND PAID TOKEN EMAIL TO PAID USER */
 Route::post('/sendVideoLinkView', function (Request $request) {
