@@ -46,5 +46,28 @@ public function feedback(Request $request)
         ], 500);
     }
 }
+public function getFeedback(Request $request)
+{
+    try {
+        // Get the place ID from the request.
+        $placeId = $request->input('place_id');
+        $payment= Payment::where('place_id',$placeId);
+        $payment_id=$payment->id;
+        // Retrieve feedback records for the given place ID.
+        $feedback = Feedback::where('payment_id', $payment_id)->get();
+
+        // Return the feedback as a JSON response.
+        return response()->json($feedback, 200);
+    } catch (\Exception $e) {
+        // Log the exception.
+        Log::error($e->getMessage());
+
+        // Return an error response.
+        return response()->json([
+            'message' => 'An error occurred while fetching feedback.',
+        ], 500);
+    }
+}
+
 
 }
