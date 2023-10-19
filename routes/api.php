@@ -76,11 +76,9 @@ Route::delete('/deletePlace/{id}', [placeController::class, 'deletePlace']);
 /** ROUTE FOR PAYMENT INFO CONTROLLER */
 Route::post('/savePaymentinfo',[paymentController::class,'payment']);
 
-Route::post('/generatePaidLink',[paymentController::class,'generatePaidLink']);
-
 Route::get('/processPaidLinks/{id}',[paymentController::class,'processPaidLink']);
 
-Route::get('/videoView/{paidToken}', [paymentController::class, 'validatePaidToken']);
+
 
 Route::get('/calculateTotalAmountPaid',[paymentController::class,'calculateTotalAmountPaid']);
 /** ROUTE FOR CATEGORY */
@@ -104,6 +102,7 @@ Route::get('/showPaymentInfos', [paymentController::class,'showPaymentInfo']);
 /** ROUTE FOR FLUTTERWAVE PAYMENT CONTROLLER */
 // The route that the button calls to initialize payment
 Route::post('/pay', [flutterController::class, 'initialize'])->name('pay');
+
 // The callback url after a payment
 Route::get('/rave/callback', [flutterController::class, 'callback'])->name('callback');
 
@@ -111,6 +110,10 @@ Route::get('/rave/callback', [flutterController::class, 'callback'])->name('call
 /**ROUTE FOR EXPORTING FILE IN EXCEL */
 Route::get('/export-payment-info', [paymentInfoExportController::class, 'exportPaymentInfo']);
 
+/** Generate paid and free Token and validate  */
+
+Route::post('/generatePaidLink',[paymentController::class,'generatePaidLink']);
+Route::get('/videoView/{paidToken}', [paymentController::class, 'validatePaidToken']);
 
 /**ROUTE TO SEND PAID TOKEN EMAIL TO PAID USER */
 Route::post('/sendVideoLinkView', function (Request $request) {

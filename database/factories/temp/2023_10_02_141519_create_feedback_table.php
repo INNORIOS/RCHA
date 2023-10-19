@@ -13,12 +13,15 @@ return new class extends Migration
     {
         Schema::create('feedback', function (Blueprint $table) {
             
-            $table->bigIncrements('feedback_id')->primary();
+            $table->bigIncrements('id')->primary();
             $table->string('comment');
             $table->string('rate');
     
             $table->timestamps();
+            $table->unsignedBigInteger('payment_id');
+            $table->foreign('payment_id')->references('id')->on('payments')->onDelete('cascade');
         });
+
     }
 
     /**
