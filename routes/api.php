@@ -19,6 +19,7 @@ use App\Http\Controllers\RCHAcontroller\imagesController;
 use App\Http\Controllers\paymentGatways\flutterController;
 use App\Http\Controllers\RCHAcontroller\paymentController;
 use App\Http\Controllers\RCHAcontroller\CategoryController;
+use App\Http\Controllers\RCHAcontroller\feedbackController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\RCHAcontroller\paymentInfoExportController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
@@ -114,6 +115,9 @@ Route::get('/export-payment-info', [paymentInfoExportController::class, 'exportP
 
 Route::post('/generatePaidLink',[paymentController::class,'generatePaidLink']);
 Route::get('/videoView/{paidToken}', [paymentController::class, 'validatePaidToken']);
+
+/** GETTING FEEDBACK FROM USER */
+Route::post('/feedback',[feedbackController::class,'feedback']);
 
 /**ROUTE TO SEND PAID TOKEN EMAIL TO PAID USER */
 Route::post('/sendVideoLinkView', function (Request $request) {

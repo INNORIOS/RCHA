@@ -25,26 +25,21 @@ public function feedback(Request $request)
                 'message' => 'You have not paid for this place.',
             ], 403);
         }
-
-        // Get the place ID from the payment record.
-        $placeId = $payment->place_id;
-
         // Create a new feedback record.
         $feedback = new Feedback();
         $feedback->payment_id = $paymentId;
-        $feedback->place_id = $placeId;
         $feedback->comment = $request->input('comment');
         $feedback->rate = $request->input('rate');
-        $feedback->save();
+       $result = $feedback->save();
 
         // Return a success response.
         return response()->json([
             'message' => 'Feedback submitted successfully.',
+            'result' => $result,
         ], 201);
     } catch (\Exception $e) {
         // Log the exception
         Log::error($e->getMessage());
-
         // Return an error response
         return response()->json([
             'message' => 'An error occurred while processing your request.',
